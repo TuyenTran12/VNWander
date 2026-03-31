@@ -1,0 +1,75 @@
+/* =========================================================
+   2. NAVBAR XANH NƯỚC BIỂN 
+   ========================================================= */
+   .vn-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    background-color: #0056A3 !important;
+    z-index: 1000;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+   }
+
+   .vn-navbar-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+   }
+
+   .vn-nav-left {
+       display: flex;
+       align-items: center;
+       gap: 15px;
+   }
+
+   .vn-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #FFFFFF !important;
+    text-decoration: none !important;
+    letter-spacing: 0.5px;
+   }
+
+   .vn-lang-btn {
+       background: rgba(255, 255, 255, 0.1);
+       color: #FFFFFF !important;
+       border: 1px solid rgba(255, 255, 255, 0.3);
+       border-radius: 6px;
+       padding: 4px 14px;
+       font-size: 0.8rem;
+       font-weight: 600;
+       text-decoration: none !important;
+       display: inline-flex;
+       align-items: center;
+       justify-content: center;
+       transition: all 0.3s ease;
+   }
+   .vn-lang-btn:hover {
+       background: rgba(255, 255, 255, 0.25);
+       border-color: #FFFFFF;
+   }
+
+   .vn-nav-right {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+   }
+
+   .vn-nav-right a {
+    color: rgba(255, 255, 255, 0.85) !important;
+    text-decoration: none !important;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: color 0.2s ease;
+   }
+
+   .vn-nav-right a:hover {
+       color: #FFFFFF !important;
+       transform: translateY(-1px);
+   }

@@ -1,0 +1,660 @@
+/* assets/css/style.css */
+
+/* =========================================================
+   1. FONTS & RESET (Tràn viền Edge-to-Edge)
+   ========================================================= */
+   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@500;600;700&display=swap');
+
+   html, body, .stApp {
+       font-family: 'Inter', sans-serif;
+       margin: 0 !important;
+       padding: 0 !important;
+       background-color: #F8F9FA;
+   }
+   
+   /* Ẩn header/footer mặc định của Streamlit */
+   header[data-testid="stHeader"], footer { display: none !important; }
+   
+   /* Phá vỡ khung mặc định, ép tràn viền 100% */
+   .block-container {
+       max-width: 100% !important;
+       padding: 0 !important;
+       margin: 0 !important;
+   }
+   
+   /* =========================================================
+      2. NAVBAR XANH NƯỚC BIỂN (Chuẩn VNTRAVEL)
+      ========================================================= */
+   .vn-navbar {
+    position: fixed;
+    top: 0; 
+    left: 0; 
+    width: 100vw;
+    background-color: #0056A3 !important; 
+    z-index: 1000;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+   
+   .vn-navbar-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    height: 70px;
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+}
+   
+   .vn-nav-left {
+       display: flex;
+       align-items: center;
+       gap: 15px;
+   }
+   
+   .vn-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #FFFFFF !important; 
+    text-decoration: none !important;
+    letter-spacing: 0.5px;
+}
+
+.vn-lang-btn {
+    background: rgba(255, 255, 255, 0.1);
+    color: #FFFFFF !important;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 6px;
+    padding: 4px 14px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-decoration: none !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+   .vn-lang-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: #FFFFFF;
+}
+      
+   .vn-nav-right {
+    display: flex;
+    gap: 30px; 
+    align-items: center;
+}
+   
+   .vn-nav-right a {
+    color: rgba(255, 255, 255, 0.85) !important; 
+    text-decoration: none !important; 
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+   
+   .vn-nav-right a:hover {
+       color: #FFFFFF !important;
+       transform: translateY(-1px);
+   }
+   
+/* =========================================================
+3. HACK NÚT NGÔN NGỮ (Streamlit Button Override)
+========================================================= */
+   div[data-testid="stButton"] {
+       position: fixed !important;
+       top: 16px !important;
+       /* Căn lề trái: Tính toán dựa trên max-width 1400px của Navbar */
+       left: calc(max(50vw - 700px, 0px) + 195px) !important; 
+       z-index: 1001 !important;
+       width: auto !important; /* KHÔNG CHO KÉO DÃN NÚT */
+   }
+   
+   div[data-testid="stButton"] > button {
+       background: transparent !important;
+       color: #FFFFFF !important;
+       border: 1px solid rgba(255, 255, 255, 0.6) !important;
+       border-radius: 4px !important;
+       height: 26px !important;
+       width: 50px !important; /* Nút nhỏ nhắn */
+       min-height: 0 !important;
+       padding: 0 !important;
+       font-size: 0.75rem !important;
+       font-weight: 600 !important;
+       display: flex !important;
+       align-items: center !important;
+       justify-content: center !important;
+       transition: all 0.2s ease !important;
+   }
+   
+   div[data-testid="stButton"] > button:hover {
+       background: rgba(255, 255, 255, 0.2) !important;
+       border-color: #FFFFFF !important;
+   }
+   
+/* =========================================================
+4. HERO SECTION (Chữ lớn, Nút bo tròn fit-content)
+========================================================= */
+   .hero-strip {
+       /* Background được nhúng từ app.py */
+       background-size: cover;
+       background-position: center;
+       background-attachment: fixed; /* Parallax effect */
+       height: 85vh; 
+       display: flex;
+       flex-direction: column;
+       justify-content: center;
+       align-items: center;
+       text-align: center;
+       color: #FFFFFF;
+   }
+   
+   .hero-content {
+       display: flex;
+       flex-direction: column;
+       align-items: center; /* Ép nút bấm vào giữa, không bị kéo ngang */
+       max-width: 900px;
+       padding: 0 2rem;
+   }
+   
+   .hero-eyebrow {
+       font-size: 1.1rem; /* Kích thước lớn */
+       font-weight: 600;
+       color: rgba(255, 255, 255, 0.9);
+       text-transform: uppercase;
+       letter-spacing: 0.2em;
+       margin-bottom: 1.2rem;
+   }
+   
+   .hero-title {
+       font-family: 'Playfair Display', serif;
+       font-size: clamp(3.5rem, 7vw, 5rem); /* Kích thước cực lớn và Responsive */
+       font-weight: 700;
+       line-height: 1.1;
+       letter-spacing: -0.015em;
+       margin-bottom: 1.5rem;
+   }
+   
+   .hero-title .blue-text {
+       color: #4CB5F9; /* Xanh nhạt sáng, nổi bật trên nền ảnh tối */
+   }
+   
+   .hero-subtitle {
+       font-size: 1.5rem; /* Kích thước lớn */
+       color: rgba(255, 255, 255, 0.85);
+       max-width: 700px; 
+       margin: 0 auto 2.5rem;
+       line-height: 1.6;
+   }
+   
+   /* Nút CTA: Bo tròn, Fit-content */
+   .btn-cta {
+       background: transparent;
+       color: #FFFFFF !important;
+       border: 2px solid rgba(255, 255, 255, 0.8);
+       padding: 0.9rem 2.5rem;
+       border-radius: 50px; /* Góc bo tròn thanh lịch */
+       text-decoration: none !important;
+       font-size: 1rem; 
+       font-weight: 600;
+       text-transform: uppercase;
+       letter-spacing: 0.1em;
+       
+       /* Chốt chặn ngăn nút bị giãn ngang */
+       display: inline-flex; 
+       width: fit-content;   
+       
+       align-items: center;
+       gap: 10px;
+       transition: all 0.3s ease;
+   }
+   
+   .btn-cta:hover {
+       background: rgba(255, 255, 255, 0.15); 
+       border-color: #FFFFFF;
+       transform: translateY(-2px);
+   }
+   
+   .btn-cta .arrow {
+       font-size: 1.2rem;
+       transition: transform 0.2s ease;
+   }
+   
+   .btn-cta:hover .arrow {
+       transform: translateX(4px); /* Hiệu ứng mũi tên bay nhẹ */
+   }
+
+   /* =========================================================
+# FAVORITE DESTINATIONS SECTION (Tabs Văn bản)
+# ========================================================= */
+
+.dest-section {
+    padding: 80px 2rem 40px 2rem;
+    background-color: #FFFFFF !important;
+    text-align: center !important; 
+    width: 100%;
+}
+
+.dest-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem !important;
+    color: #0056A3 !important;
+    text-align: center !important; 
+    margin-bottom: 15px !important;
+    font-weight: 700 !important;
+    width: 100% !important;
+    display: block !important;
+}
+
+.dest-subtitle {
+    font-size: 1.1rem !important;
+    color: #000000 !important; 
+    font-weight: 700 !important;
+    text-align: center !important; 
+    max-width: 800px !important;
+    margin: 0 auto 50px auto !important;
+    line-height: 1.6 !important;
+    display: block !important;
+}
+
+
+section[data-testid="stMain"] div[data-testid="stButton"],
+.main div[data-testid="stButton"],
+.block-container div[data-testid="stButton"] {
+    position: relative !important;
+    top: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    right: auto !important;
+    z-index: 10 !important;
+    margin-top: 10px !important;
+}
+
+div[data-testid="stVerticalBlock"] > div:has(div[data-testid="stButton"]) {
+    display: inline-block !important;
+    margin-right: 15px !important;
+}
+
+/* =========================================================
+# NEW: WHY CHOOSE US SECTION
+# ========================================================= */
+
+  /* Main section spacing */
+  .feature-section {
+    padding: 80px 0;
+    background-color: #FFFFFF;
+  }
+
+  /* Header centering and typography */
+  .feature-header {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 60px auto;
+  }
+
+  /* Section label (Eyebrow text) */
+  .feature-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #0056A3;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+  }
+
+  /* Feature Grid Layout */
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 30px; 
+    max-width: 1100px; 
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+  /* Feature Card Styling */
+.feature-card {
+    padding: 35px 25px;
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    text-align: center; 
+}
+
+  /* Card Hover Effect */
+  .feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+    border-color: #0056A3;
+  }
+
+  /* Icon Container */
+  .feature-icon {
+    font-size: 2.5rem;
+    margin-bottom: 25px;
+    display: block;
+  }
+
+  /* Feature Title */
+  .feature-card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #000000 !important;
+    margin-bottom: 15px;
+  }
+
+  /* Feature Description */
+  .feature-card-desc {
+    font-size: 1rem;
+    color: #4A5568;
+    line-height: 1.6;
+  }
+
+  /* Section Description below title */
+.feature-main-desc {
+    font-size: 1.1rem;
+    color: #4A5568;
+    line-height: 1.7;
+    max-width: 900px;
+    margin: 0 auto 50px auto;
+    text-align: center;
+}
+
+
+
+@media (max-width: 1024px) {
+    .feature-grid { grid-template-columns: repeat(2, 1fr); } /* 2x2 on tablets */
+}
+
+@media (max-width: 768px) {
+    .feature-grid { 
+        grid-template-columns: 1fr; 
+    } 
+}
+
+@media (max-width: 640px) {
+    .feature-grid { grid-template-columns: 1fr; } /* Stack on mobile */
+}
+
+
+/* =========================================================
+6. REVIEWS SECTION 
+========================================================= */
+
+/* Strip container with light background and nh-fade-slide animation on load */
+.bg-white { background-color: var(--bg-white); }
+.bg-light-grey { background-color: #F8F9FA; } /* subtle gray */
+
+.contained-content {
+    max-width: var(--container-max-width, 1100px);
+    margin: 0 auto;
+    padding: 7rem 2rem; /* Vertical space */
+}
+
+/* Flexbox grid system for 3 cards */
+.reviews-grid {
+    display: flex;
+    gap: 2.5rem;
+    margin-top: 4rem;
+    flex-wrap: wrap; /* responsive */
+}
+
+/* Individual Review Card - Soft shadow, rounded corners */
+.review-card {
+    flex: 1;
+    min-width: 300px;
+    background: #FFFFFF;
+    padding: 2rem;
+    border-radius: 8px; /* subtle bo tròn */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03); /* soft shadow */
+    transition: var(--transition-smooth, all 0.4s ease);
+    display: flex;
+    flex-direction: column;
+}
+.review-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06); }
+
+/* Reviewer Meta (Name, Date) */
+.reviewer-meta { margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem; }
+.reviewer-name { font-weight: 600; font-size: 1.05rem; }
+.review-date { font-size: 0.85rem; color: #718096; }
+
+/* Star Rating - Solid Gold */
+.review-stars { color: #F6AD55; font-size: 1.2rem; margin-bottom: 1rem; letter-spacing: -2px; }
+
+/* Testimonial Title (Bold Sans-serif) */
+.review-testimonial-title { font-weight: 700; font-size: 1.15rem; margin-bottom: 0.8rem; }
+
+/* Detailed Text (Clean Sans-serif) */
+.review-detailed-text { font-size: 0.95rem; color: #4A5568; line-height: 1.65; margin-bottom: 2rem; flex-grow: 1; }
+
+/* CTA Link with Arrow */
+.review-cta {
+    background: transparent;
+    color: var(--accent-blue, #0077C8) !important;
+    text-decoration: none !important;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: var(--transition-smooth, all 0.4s ease);
+}
+.review-cta:hover { transform: translateX(2px); color: var(--accent-blue-dark, #0056A3) !important; }
+.review-cta .arrow { font-size: 1.1rem; }
+
+/* =========================================================
+# FOOTER SECTION
+# ========================================================= */
+
+.vn-footer {
+  background-color: #0056A3; /* Match Navbar Deep Blue */
+  color: #FFFFFF;
+  padding: 60px 0 30px 0;
+  margin-top: 80px;
+  width: 100vw;
+}
+
+.vn-footer-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  text-align: center;
+}
+
+.vn-footer-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #FFFFFF !important;
+  text-decoration: none !important;
+  display: block;
+  margin-bottom: 20px;
+}
+
+.vn-footer-text {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+  letter-spacing: 0.5px;
+}
+
+.vn-footer-divider {
+  border: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin: 30px 0;
+  max-width: 200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* =========================================================
+# CITY CARDS SECTION
+# ========================================================= */
+
+.city-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.city-card {
+  background: #FFFFFF;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: 1px solid #E2E8F0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.city-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+  border-color: #0056A3;
+}
+
+.city-card.selected {
+  border-color: #0056A3;
+  box-shadow: 0 0 0 3px rgba(0, 86, 163, 0.2);
+}
+
+.city-image-container {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.city-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.city-card:hover .city-image,
+.city-card.selected .city-image {
+  transform: scale(1.05);
+}
+
+.city-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.city-name {
+  color: white;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Explore More Button */
+.explore-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  color: #0056A3 !important;
+  border: 2px solid #0056A3;
+  padding: 0.9rem 2.5rem;
+  border-radius: 50px;
+  text-decoration: none !important;
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transition: all 0.3s ease;
+  margin: 2rem auto;
+}
+
+.explore-btn:hover {
+  background: #0056A3;
+  color: #FFFFFF !important;
+  transform: translateY(-2px);
+}
+
+.explore-btn .arrow {
+  font-size: 1.2rem;
+  transition: transform 0.2s ease;
+}
+
+.explore-btn:hover .arrow {
+  transform: translateX(4px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .city-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    padding: 1.5rem;
+  }
+
+  .city-image-container {
+    height: 180px;
+  }
+
+  .city-name {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .city-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .city-image-container {
+    height: 160px;
+  }
+}
+
+/* =========================================================
+# REGION TABS (HTML-based replacement)
+# ========================================================= */
+.region-tabs-container {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center !important;
+    gap: 40px !important;
+    margin: 30px 0 50px 0 !important;
+    width: 100% !important;
+}
+
+a.region-tab {
+    text-decoration: none !important;
+    color: #000000 !important;
+    font-family: 'Playfair Display', serif !important;
+    font-size: 1.4rem !important;
+    font-weight: 600 !important;
+    padding-bottom: 5px !important;
+    border-bottom: 3px solid transparent !important;
+    transition: all 0.3s ease !important;
+    cursor: pointer !important;
+    display: block !important;
+    width: fit-content !important;
+}
+
+a.region-tab:hover,
+a.region-tab.active {
+    color: #0056A3 !important;
+    border-bottom: 3px solid #0056A3 !important;
+}
+

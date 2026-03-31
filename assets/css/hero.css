@@ -1,0 +1,89 @@
+/* =========================================================
+   4. HERO SECTION (Chữ lớn, Nút bo tròn fit-content)
+   ========================================================= */
+   .hero-strip {
+       background-size: cover;
+       background-position: center;
+       height: 85vh;
+       display: flex;
+       flex-direction: column;
+       justify-content: center;
+       align-items: center;
+       text-align: center;
+       color: #FFFFFF;
+   }
+
+   .hero-content {
+       display: flex;
+       flex-direction: column;
+       align-items: center; /* Ép nút bấm vào giữa, không bị kéo ngang */
+       max-width: 900px;
+       padding: 0 2rem;
+   }
+
+   .hero-eyebrow {
+       font-size: 1.1rem; /* Kích thước lớn */
+       font-weight: 600;
+       color: rgba(255, 255, 255, 0.9);
+       text-transform: uppercase;
+       letter-spacing: 0.2em;
+       margin-bottom: 1.2rem;
+   }
+
+   .hero-title {
+       font-family: 'Playfair Display', serif;
+       font-size: clamp(3.5rem, 7vw, 5rem); /* Kích thước cực lớn và Responsive */
+       font-weight: 700;
+       line-height: 1.1;
+       letter-spacing: -0.015em;
+       margin-bottom: 1.5rem;
+   }
+
+   .hero-title .blue-text {
+       color: #4CB5F9; /* Xanh nhạt sáng, nổi bật trên nền ảnh tối */
+   }
+
+   .hero-subtitle {
+       font-size: 1.5rem; /* Kích thước lớn */
+       color: rgba(255, 255, 255, 0.85);
+       max-width: 700px;
+       margin: 0 auto 2.5rem;
+       line-height: 1.6;
+   }
+
+   /* Nút CTA: Bo tròn, Fit-content */
+   .btn-cta {
+       background: transparent;
+       color: #FFFFFF !important;
+       border: 2px solid rgba(255, 255, 255, 0.8);
+       padding: 0.9rem 2.5rem;
+       border-radius: 50px; /* Góc bo tròn thanh lịch */
+       text-decoration: none !important;
+       font-size: 1rem;
+       font-weight: 600;
+       text-transform: uppercase;
+       letter-spacing: 0.1em;
+
+       /* Chốt chặn ngăn nút bị giãn ngang */
+       display: inline-flex;
+       width: fit-content;
+
+       align-items: center;
+       gap: 10px;
+       transition: all 0.3s ease;
+   }
+
+   .btn-cta:hover {
+       background: rgba(255, 255, 255, 0.15);
+       border-color: #FFFFFF;
+       transform: translateY(-2px);
+   }
+
+   .btn-cta .arrow {
+       font-size: 1.2rem;
+       transition: transform 0.2s ease;
+   }
+
+   .btn-cta:hover .arrow {
+       transform: translateX(4px); /* Hiệu ứng mũi tên bay nhẹ */
+   }
