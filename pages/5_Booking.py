@@ -2,7 +2,7 @@ import streamlit as st
 import datetime
 from config.languages import CONTENT
 from utils.session_init import init_session_state
-from utils.helpers import load_all_global_css  # Import hàm load CSS
+from utils.helpers import load_all_global_css 
 from components.navbar import render_navbar
 from components.footer import render_footer
 
@@ -10,7 +10,7 @@ from components.footer import render_footer
 st.set_page_config(page_title="VNWander | Book Tickets", layout="wide")
 init_session_state()
 
-# Load toàn bộ CSS (Giúp kết nối với file CSS vừa tách)
+# Load toàn bộ CSS (Giúp kết nối với file CSS đã tách)
 load_all_global_css()
 
 # 2. Xử lý ngôn ngữ đồng bộ với URL
@@ -19,7 +19,7 @@ if "lang" in st.query_params:
 elif 'lang' not in st.session_state:
     st.session_state.lang = 'vi'
 
-# Sử dụng .get() để lấy dữ liệu an toàn
+# SỬ DỤNG .get() ĐỂ CHỐNG LỖI KEYERROR TUYỆT ĐỐI
 L = CONTENT.get(st.session_state.lang, {})
 B = L.get('booking', {}) 
 
@@ -30,7 +30,7 @@ render_navbar(current_page_path="/Booking")
 today = datetime.date.today().strftime("%Y-%m-%d")
 tomorrow = (datetime.date.today() + datetime.timedelta(days=2)).strftime("%Y-%m-%d")
 
-# 4. KHỐI HTML (Đã được dọn dẹp sạch sẽ CSS)
+# 4. KHỐI HTML (Đã sử dụng các từ khóa mới: 'from', 'to', 'depart_date'...)
 booking_html = f"""
 <div class="booking-wrapper">
 <div class="booking-box">

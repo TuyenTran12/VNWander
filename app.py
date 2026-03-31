@@ -75,7 +75,7 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 # =========================================================
-# 2. RENDER REGION TABS (DÙNG CALLBACK CHỐNG XUNG ĐỘT STATE)
+# 2. RENDER REGION TABS 
 # =========================================================
 regions_data = DEST.get('regions', {})
 options = list(regions_data.keys())
@@ -116,12 +116,13 @@ city_html = '<div class="city-grid">\n'
 
 for city_item in cities:
     city_name = city_item['name']    
+    
     main_img_url = city_item['img'].strip()  
+    
     img_name = city_name.lower().replace(' ', '-').replace('.', '')
     
-    # Cộng dồn HTML từng thẻ thành phố vào biến city_html
     city_html += f"""
-<div class="city-card-premium" style="position: relative;">
+<div class="city-card-premium">
     <a href="/Booking" target="_self" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10;"></a>
     <img class="city-bg-img" src="{main_img_url}" loading="lazy" decoding="async" alt="{city_name}" />
     <div class="city-overlay"></div>
@@ -136,51 +137,42 @@ for city_item in cities:
 <h3 class="city-name-title">{city_name}</h3>
 </div>
 """
-
-# Chốt lại grid
 city_html += '</div>'
 
 # In toàn bộ Grid Thành phố ra bằng 1 lệnh duy nhất
 st.markdown(city_html, unsafe_allow_html=True)
 
-# =========================================================
-# ABOUT US SECTION
-# =========================================================
-A = L['about_section']
-
-# Tạo HTML cho các Why Cards
+# ===== About Us Section =====
+A = L.get('about_section', {})
 cards_html = "".join([
     f"""<div class="why-card">
-        <div class="why-icon">{c['icon']}</div>
-        <h3 class="why-title">{c['title']}</h3>
-        <p class="why-desc">{c['desc']}</p>
-    </div>""" for c in A['cards']
+        <div class="why-icon">{c.get('icon', '')}</div>
+        <h3 class="why-title">{c.get('title', '')}</h3>
+        <p class="why-desc">{c.get('desc', '')}</p>
+    </div>""" for c in A.get('cards', [])
 ])
 
-# Tạo HTML cho các Value Pills
-pills_html = "".join([f'<div class="value-pill">{v}</div>' for v in A['values_list']])
+pills_html = "".join([f'<div class="value-pill">{v}</div>' for v in A.get('values_list', [])])
 
 about_html = f"""
 <div class="about-section">
-<div class="about-container">
-<h2 class="section-heading">{A['why_title']}</h2>
-<p style="text-align: center; max-width: 800px; margin: -20px auto 50px auto; color: #111; line-height: 1.7; font-size: 1.1rem;">
-{A['why_subtitle']}
-</p>
-<div class="why-grid">{cards_html}</div>
-
-<div class="values-container">
-<h2 class="section-heading" style="margin-bottom: 40px;">{A['values_title']}</h2>
-<div class="values-wrapper">{pills_html}</div>
-</div>
-
-<div class="ceo-quote-box">
-<div class="quote-icon">"</div>
-<p class="ceo-text">{A['ceo_quote']}</p>
-<div class="ceo-author">{A['ceo_name']}</div>
-<div class="ceo-title">{A['ceo_pos']}</div>
-</div>
-</div>
+    <div class="about-container">
+        <h2 class="section-heading">{A.get('why_title', '')}</h2>
+        <p style="text-align: center; max-width: 800px; margin: -20px auto 50px auto; color: #111; line-height: 1.7; font-size: 1.1rem;">
+            {A.get('why_subtitle', '')}
+        </p>
+        <div class="why-grid">{cards_html}</div>
+        <div class="values-container">
+            <h2 class="section-heading" style="margin-bottom: 40px;">{A.get('values_title', '')}</h2>
+            <div class="values-wrapper">{pills_html}</div>
+        </div>
+        <div class="ceo-quote-box">
+            <div class="quote-icon">"</div>
+            <p class="ceo-text">{A.get('ceo_quote', '')}</p>
+            <div class="ceo-author">{A.get('ceo_name', '')}</div>
+            <div class="ceo-title">{A.get('ceo_pos', '')}</div>
+        </div>
+    </div>
 </div>
 """
 st.markdown(about_html, unsafe_allow_html=True)

@@ -372,108 +372,16 @@ body {
 /* =========================================================
    BOOKING PAGE SECTION
    ========================================================= */
-.booking-wrapper { 
-    padding: 100px 20px 60px 20px; 
-    background-color: #f4f7f6; 
-    min-height: 80vh; 
-}
-
-.booking-box { 
-    max-width: 1000px; 
-    margin: 0 auto; 
-    background: white; 
-    padding: 40px; 
-    border-radius: 20px; 
-    box-shadow: 0 15px 40px rgba(0,0,0,0.08); 
-}
-
-.booking-title { 
-    font-family: 'Playfair Display', serif; 
-    font-size: 2.5rem; 
-    color: #0056A3; 
-    margin-bottom: 30px; 
-    font-weight: 700; 
-    text-align: center; 
-}
-
-/* Các tùy chọn Khứ hồi / Một chiều */
-.trip-type-options { 
-    display: flex; 
-    gap: 30px; 
-    margin-bottom: 25px; 
-    border-bottom: 1px solid #eee; 
-    padding-bottom: 15px; 
-}
-
-.trip-type-options label { 
-    font-weight: 600; 
-    color: #333; 
-    cursor: pointer; 
-    display: flex; 
-    align-items: center; 
-    gap: 8px; 
-}
-
-/* Lưới Form */
-.form-grid { 
-    display: grid; 
-    grid-template-columns: 1fr 1fr 1fr 1fr; 
-    gap: 20px; 
-}
-
-.form-group { 
-    display: flex; 
-    flex-direction: column; 
-    gap: 8px; 
-}
-
-.form-group label { 
-    font-weight: 600; 
-    color: #555; 
-    font-size: 0.9rem; 
-    text-transform: uppercase; 
-    letter-spacing: 0.5px; 
-}
-
-.form-group input, 
-.form-group select { 
-    padding: 14px 15px; 
-    border: 1px solid #ddd; 
-    border-radius: 10px; 
-    font-size: 1rem; 
-    color: #111; 
-    background: #fafafa; 
-    transition: border 0.3s; 
-    width: 100%; 
-}
-
-.form-group input:focus, 
-.form-group select:focus { 
-    border-color: #4CB5F9; 
-    outline: none; 
-    background: #fff; 
-}
-
-/* Nút Submit */
-.search-btn-wrapper { 
-    grid-column: 1 / -1; 
-    display: flex; 
-    justify-content: flex-end; 
-    margin-top: 15px; 
-}
-
-.search-btn { 
-    background: #0056A3; 
-    color: white; 
-    padding: 16px 40px; 
-    border: none; 
-    border-radius: 50px; 
-    font-size: 1.1rem; 
-    font-weight: 700; 
-    cursor: pointer; 
-    transition: background 0.3s; 
-}
-
-.search-btn:hover { 
-    background: #004080; 
-}
+.booking-wrapper { padding: 100px 20px 60px 20px; background-color: #f4f7f6; min-height: 80vh; }
+.booking-box { max-width: 1000px; margin: 0 auto; background: white; padding: 40px; border-radius: 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.08); }
+.booking-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: #0056A3; margin-bottom: 30px; font-weight: 700; text-align: center; }
+.trip-type-options { display: flex; gap: 30px; margin-bottom: 25px; border-bottom: 1px solid #eee; padding-bottom: 15px; }
+.trip-type-options label { font-weight: 600; color: #333; cursor: pointer; display: flex; align-items: center; gap: 8px; }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 20px; }
+.form-group { display: flex; flex-direction: column; gap: 8px; }
+.form-group label { font-weight: 600; color: #555; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.5px; }
+.form-group input, .form-group select { padding: 14px 15px; border: 1px solid #ddd; border-radius: 10px; font-size: 1rem; color: #111; background: #fafafa; transition: border 0.3s; width: 100%; }
+.form-group input:focus, .form-group select:focus { border-color: #4CB5F9; outline: none; background: #fff; }
+.search-btn-wrapper { grid-column: 1 / -1; display: flex; justify-content: flex-end; margin-top: 15px; }
+.search-btn { background: #0056A3; color: white; padding: 16px 40px; border: none; border-radius: 50px; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: background 0.3s; }
+.search-btn:hover { background: #004080; }

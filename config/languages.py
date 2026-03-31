@@ -82,11 +82,7 @@ CONTENT = {
             }
         },
         
-        # =========================================================
-        # ABOUT SECTION
-        # =========================================================
-
-                "about_section": {
+        "about_section": {
             "why_title": "Vì sao chọn VNWander?",
             "why_subtitle": "Tự hào là đối tác chiến lược của hơn 20,000 tổ chức uy tín và hàng triệu du khách toàn cầu. Với nền tảng công nghệ tối tân và bề dày kinh nghiệm, chúng tôi tự tin là người bạn đồng hành số 1 của bạn.",
             "cards": [
@@ -101,6 +97,18 @@ CONTENT = {
             "ceo_quote": "Nhận thấy thị trường du lịch trong nước chưa có một nền tảng công nghệ đủ tốt, sứ mệnh của VNWander là mang đến lợi ích tối đa cho khách hàng thông qua các giải pháp công nghệ tiên phong, đầy sáng tạo. Chúng tôi khát khao trở thành nền tảng cốt lõi tạo nên sự thịnh vượng, nâng tầm vị thế du lịch Việt Nam trên đấu trường khu vực và vươn xa đến tầm quốc tế.",
             "ceo_name": "Trần Bình Giang",
             "ceo_pos": "CEO & Founder"
+        },
+        "booking": {
+            "title": "Tìm chuyến bay & Đặt phòng",
+            "round_trip": "Khứ hồi",
+            "one_way": "Một chiều",
+            "from": "Điểm khởi hành",
+            "to": "Điểm đến",
+            "depart_date": "Ngày đi",
+            "return_date": "Ngày về",
+            "passengers_class": "Số lượng vé & Hạng ghế",
+            "adult": "Người lớn",
+            "search_btn": "TÌM CHUYẾN ĐI"
         },
 
         # =========================================================
@@ -192,20 +200,6 @@ CONTENT = {
                 }
             ]
         },
-
-        "booking": {
-            "title": "Tìm chuyến bay & Đặt phòng",
-            "round_trip": "Khứ hồi",
-            "one_way": "Một chiều",
-            "from": "Điểm khởi hành",
-            "to": "Điểm đến",
-            "depart_date": "Ngày đi",
-            "return_date": "Ngày về",
-            "passengers_class": "Số lượng vé & Hạng ghế",
-            "adult": "Người lớn",
-            "search_btn": "TÌM CHUYẾN ĐI"
-        },
-
         # =========================================================
         # FOOTER SECTION
         # =========================================================
@@ -307,15 +301,12 @@ CONTENT = {
             }
         },
 
-        # =========================================================
-        # ABOUT SECTION
-        # =========================================================
-                "about_section": {
+        "about_section": {
             "why_title": "Why Choose VNWander?",
             "why_subtitle": "Proud to be a strategic partner of 20,000+ prestigious organizations and millions of global travelers. With advanced technology and rich experience, we are your #1 companion.",
             "cards": [
                 {"icon": "👥", "title": "Top-tier Team", "desc": "Experienced, highly specialized, and dedicated personnel, ensuring absolute trust in every partnership."},
-                {"icon": "🔒", "title": "Absolute Security", "                  icon": "🔒", "title": "Absolute Security", "desc": "Commitment to information protection through strict NDA contracts. Only project personnel have access to data."},
+                {"icon": "🔒", "title": "Absolute Security", "desc": "Commitment to information protection through strict NDA contracts. Only project personnel have access to data."},
                 {"icon": "🚀", "title": "Pioneering Tech", "desc": "Constantly updating the most modern technologies to optimize productivity and deliver superior value."},
                 {"icon": "🎧", "title": "24/7 Support", "desc": "All your needs are quickly responded to and resolved by our professional experts, day or night."}
             ],
@@ -326,7 +317,19 @@ CONTENT = {
             "ceo_name": "Binh Giang Tran",
             "ceo_pos": "CEO & Founder"
         },
-
+        "booking": {
+            "title": "Search Flights & Hotels",
+            "round_trip": "Round-trip",
+            "one_way": "One-way",
+            "from": "Leaving from",
+            "to": "Going to",
+            "depart_date": "Depart Date",
+            "return_date": "Return Date",
+            "passengers_class": "Passengers & Class",
+            "adult": "Adult",
+            "search_btn": "SEARCH TRIPS"
+        },
+        
         # =========================================================
         # REVIEWS SECTION
         # =========================================================
@@ -416,20 +419,6 @@ CONTENT = {
                 }
             ]
         },
-
-        "booking": {
-            "title": "Search Flights & Hotels",
-            "round_trip": "Round-trip",
-            "one_way": "One-way",
-            "from": "Leaving from",
-            "to": "Going to",
-            "depart_date": "Depart Date",
-            "return_date": "Return Date",
-            "passengers_class": "Passengers & Class",
-            "adult": "Adult",
-            "search_btn": "SEARCH TRIPS"
-        },
-
         # =========================================================
         # FOOTER SECTION
         # =========================================================

@@ -8,14 +8,15 @@ from config.languages import CONTENT
 def main():
     # 1. Khởi tạo
     st.set_page_config(page_title="VNWander - Careers", layout="wide")
-    init_session_state()    
+    init_session_state()
     load_all_global_css()
     render_navbar(current_page_path="/Careers")
 
     if "lang" in st.query_params:
         st.session_state.lang = st.query_params["lang"]
     elif 'lang' not in st.session_state:
-        st.session_state.lang = 'vi' 
+        st.session_state.lang = 'vi'
+
     # 2. Lấy dữ liệu
     lang = st.session_state.get('lang', 'vi')
     C = CONTENT[lang].get('career_page', {})
