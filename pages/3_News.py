@@ -12,6 +12,11 @@ def main():
     init_session_state()
     load_all_global_css()
 
+    if "lang" in st.query_params:
+        st.session_state.lang = st.query_params["lang"]
+    elif 'lang' not in st.session_state:
+        st.session_state.lang = 'vi' 
+
     # 2. Điều hướng
     render_navbar(current_page_path="/News")
 

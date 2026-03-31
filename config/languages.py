@@ -83,6 +83,27 @@ CONTENT = {
         },
         
         # =========================================================
+        # ABOUT SECTION
+        # =========================================================
+
+                "about_section": {
+            "why_title": "Vì sao chọn VNWander?",
+            "why_subtitle": "Tự hào là đối tác chiến lược của hơn 20,000 tổ chức uy tín và hàng triệu du khách toàn cầu. Với nền tảng công nghệ tối tân và bề dày kinh nghiệm, chúng tôi tự tin là người bạn đồng hành số 1 của bạn.",
+            "cards": [
+                {"icon": "👥", "title": "Đội ngũ hàng đầu", "desc": "Nhân sự giàu kinh nghiệm, chuyên môn cao và tận tâm, mang đến sự tin tưởng tuyệt đối khi hợp tác."},
+                {"icon": "🔒", "title": "Bảo mật tuyệt đối", "desc": "Cam kết bảo vệ thông tin qua hợp đồng NDA khắt khe. Chỉ nhân sự dự án mới có quyền tiếp cận dữ liệu."},
+                {"icon": "🚀", "title": "Công nghệ tiên phong", "desc": "Liên tục cập nhật công nghệ hiện đại nhất để tối ưu hóa năng suất và mang lại giá trị vượt trội."},
+                {"icon": "🎧", "title": "Hỗ trợ 24/7", "desc": "Mọi nhu cầu của bạn đều được đội ngũ chuyên gia phản hồi và giải quyết nhanh chóng bất kể ngày đêm."}
+            ],
+            "values_title": "Giá trị cốt lõi",
+            "values_list": ["Trung thực tuyệt đối", "Hướng tới khách hàng", "Tinh thần tập thể", "Coi nhau như gia đình", "Quyết liệt hành động", "Cởi mở & Sẻ chia", "Linh hoạt thích ứng", "Luôn là số 1"],
+            "ceo_title_section": "CEO của chúng tôi nói",
+            "ceo_quote": "Nhận thấy thị trường du lịch trong nước chưa có một nền tảng công nghệ đủ tốt, sứ mệnh của VNWander là mang đến lợi ích tối đa cho khách hàng thông qua các giải pháp công nghệ tiên phong, đầy sáng tạo. Chúng tôi khát khao trở thành nền tảng cốt lõi tạo nên sự thịnh vượng, nâng tầm vị thế du lịch Việt Nam trên đấu trường khu vực và vươn xa đến tầm quốc tế.",
+            "ceo_name": "Trần Bình Giang",
+            "ceo_pos": "CEO & Founder"
+        },
+
+        # =========================================================
         # REVIEWS SECTION
         # =========================================================
         "reviews": {
@@ -171,6 +192,20 @@ CONTENT = {
                 }
             ]
         },
+
+        "booking": {
+            "title": "Tìm chuyến bay & Đặt phòng",
+            "round_trip": "Khứ hồi",
+            "one_way": "Một chiều",
+            "from": "Điểm khởi hành",
+            "to": "Điểm đến",
+            "depart_date": "Ngày đi",
+            "return_date": "Ngày về",
+            "passengers_class": "Số lượng vé & Hạng ghế",
+            "adult": "Người lớn",
+            "search_btn": "TÌM CHUYẾN ĐI"
+        },
+
         # =========================================================
         # FOOTER SECTION
         # =========================================================
@@ -273,6 +308,26 @@ CONTENT = {
         },
 
         # =========================================================
+        # ABOUT SECTION
+        # =========================================================
+                "about_section": {
+            "why_title": "Why Choose VNWander?",
+            "why_subtitle": "Proud to be a strategic partner of 20,000+ prestigious organizations and millions of global travelers. With advanced technology and rich experience, we are your #1 companion.",
+            "cards": [
+                {"icon": "👥", "title": "Top-tier Team", "desc": "Experienced, highly specialized, and dedicated personnel, ensuring absolute trust in every partnership."},
+                {"icon": "🔒", "title": "Absolute Security", "                  icon": "🔒", "title": "Absolute Security", "desc": "Commitment to information protection through strict NDA contracts. Only project personnel have access to data."},
+                {"icon": "🚀", "title": "Pioneering Tech", "desc": "Constantly updating the most modern technologies to optimize productivity and deliver superior value."},
+                {"icon": "🎧", "title": "24/7 Support", "desc": "All your needs are quickly responded to and resolved by our professional experts, day or night."}
+            ],
+            "values_title": "Core Values",
+            "values_list": ["Absolute Honesty", "Customer-Centric", "Team Spirit", "Treating as Family", "Decisive Action", "Openness & Sharing", "Flexible Adaptation", "Always Number 1"],
+            "ceo_title_section": "What Our CEO Says",
+            "ceo_quote": "Realizing that the domestic tourism market lacked a sufficiently strong technology platform, VNWander's mission is to maximize benefits for customers through pioneering and creative travel tech solutions. We aspire to be the core platform for prosperity, elevating Vietnam's tourism status regionally and internationally.",
+            "ceo_name": "Binh Giang Tran",
+            "ceo_pos": "CEO & Founder"
+        },
+
+        # =========================================================
         # REVIEWS SECTION
         # =========================================================
         "reviews": {
@@ -361,6 +416,20 @@ CONTENT = {
                 }
             ]
         },
+
+        "booking": {
+            "title": "Search Flights & Hotels",
+            "round_trip": "Round-trip",
+            "one_way": "One-way",
+            "from": "Leaving from",
+            "to": "Going to",
+            "depart_date": "Depart Date",
+            "return_date": "Return Date",
+            "passengers_class": "Passengers & Class",
+            "adult": "Adult",
+            "search_btn": "SEARCH TRIPS"
+        },
+
         # =========================================================
         # FOOTER SECTION
         # =========================================================

@@ -63,3 +63,417 @@ body {
     font-size: 0.85rem;
     line-height: 1.5;
 }
+
+/* =========================================================
+   TEAM PAGE STYLES
+   ========================================================= */
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    padding: 40px 0;
+}
+
+.team-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    text-align: center;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+    border: 1px solid #f0f0f0;
+}
+
+.team-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+.member-img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+    border: 4px solid #f0f7ff;
+}
+
+.member-name {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1a202c;
+    margin-bottom: 5px;
+}
+
+.member-role {
+    color: #0056A3;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+}
+
+.member-bio {
+    font-size: 0.9rem;
+    color: #718096;
+    line-height: 1.5;
+}
+
+/* =========================================================
+   CAREERS PAGE
+   ========================================================= */
+.values-title-blue {
+    font-family: 'Playfair Display', serif !important;
+    font-size: 3.8rem !important;
+    color: #4CB5F9 !important; 
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 60px;
+    width: 100%;
+}
+
+/* 2. KHUNG CHỨA - CỐ ĐỊNH CHIỀU CAO ĐỂ KHÔNG BỊ GIẬT */
+.focus-slider-wrapper {
+    position: relative;
+    max-width: 1300px;
+    margin: 0 auto;
+    height: 350px; /* Khóa chiều cao cố định */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: visible; /* Cho phép các card scale to ra không bị mất hình */
+}
+
+.focus-slider-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+    width: 100%;
+    will-change: transform; /* Báo trước cho trình duyệt để tối ưu */
+}
+
+/* 3. THIẾT KẾ CARD - CHỐNG NHÁY (ANTI-FLICKER) */
+.value-card-focus {
+    width: 400px;  
+    height: 260px; 
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid #eee;
+    background-color: #f0f0f0; /* Nền xám nhẹ để khi chưa có ảnh không bị trắng xóa */
+    
+    /* Chìa khóa mượt mà: Hardware Acceleration */
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1), 
+                filter 0.6s ease, 
+                box-shadow 0.6s ease;
+}
+
+.side-card {
+    filter: brightness(35%) blur(1px); /* Thêm tí blur cho chuyên nghiệp */
+    transform: scale(0.88) translateZ(0);
+    z-index: 1;
+}
+
+.center-card {
+    filter: brightness(100%) blur(0px);
+    transform: scale(1.05) translateZ(0);
+    z-index: 10;
+    box-shadow: 0 20px 40px rgba(76, 181, 249, 0.25);
+    border: 3px solid #4CB5F9 !important;
+}
+
+.value-card-focus img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover;
+    display: block;
+}
+
+.value-info-focus {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 15px;
+    background: linear-gradient(transparent, rgba(0,0,0,0.85));
+    color: white;
+    text-align: center;
+    pointer-events: none; /* Không để text làm cản trở click */
+}
+
+/* =========================================================
+   NEWS PAGE REDESIGN
+   ========================================================= */
+/* ÉP KHUNG CHÍNH CỦA STREAMLIT */
+[data-testid="stAppViewBlockContainer"] {
+    max-width: 100% !important; /* Cho phép căn giữa trên toàn màn hình */
+    padding-top: 5rem !important;
+}
+
+/* THIẾT KẾ THẺ BÀI BÁO (CARD) */
+.vn-news-card-50 {
+    width: 50% !important;     
+    margin: 0 auto 100px auto !important;
+    border: 1px solid #e0e0e0 !important;
+    border-radius: 24px !important;     
+    overflow: hidden !important;         
+    background-color: #ffffff !important;
+    display: flex !important;
+    flex-direction: column !important;   
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.vn-news-card-50:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+}
+
+/* Ảnh nằm trên cùng của Card */
+.vn-news-card-50 img {
+    width: 100% !important;
+    height: 350px !important; /* Chiều cao ảnh vừa vặn với chiều rộng 50% */
+    object-fit: cover !important;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+/* Nội dung bên dưới ảnh */
+.vn-news-info-box {
+    padding: 35px !important; /* Tạo khoảng trống bên trong viền */
+    text-align: left;
+}
+
+.vn-news-title-modern {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem !important;
+    color: #111 !important;
+    line-height: 1.3 !important;
+    margin-bottom: 15px !important;
+    font-weight: 700 !important;
+}
+
+.vn-news-summary-modern {
+    font-size: 1.05rem !important;
+    color: #555 !important;
+    line-height: 1.7 !important;
+    margin-bottom: 25px !important;
+}
+
+.vn-news-footer-modern {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 20px;
+    border-top: 1px solid #f5f5f5;
+    font-size: 0.85rem;
+    color: #999;
+}
+
+/* assets/css/components.css */
+
+/* =========================================================
+   CAREERS - DARK LANDSCAPE SCROLL (3 CARDS FOCUS)
+   ========================================================= */
+
+/* KHUNG NỀN ĐEN */
+.values-dark-section {
+    background-color: #000000 !important;
+    padding: 100px 0;
+    margin-top: 80px;
+    width: 100%;
+}
+
+/* TIÊU ĐỀ XANH NỔI BẬT */
+.values-title-center {
+    font-family: 'Playfair Display', serif !important;
+    font-size: 3.5rem !important;
+    color: #4CB5F9 !important;
+    text-align: center;
+    margin-bottom: 60px !important;
+    font-weight: 800;
+}
+
+/* CONTAINER CUỘN NGANG */
+.values-drag-container {
+    display: flex;
+    gap: 30px; /* Khoảng cách giữa các ảnh */
+    overflow-x: auto; /* Cho phép cuộn/kéo ngang */
+    padding: 20px 50px 50px 50px;
+    scroll-snap-type: x mandatory; /* Hiệu ứng hít ảnh */
+    cursor: grab;
+    -webkit-overflow-scrolling: touch;
+}
+
+.values-drag-container:active {
+    cursor: grabbing;
+}
+
+/* ẨN THANH CUỘN (SCROLLBAR) */
+.values-drag-container::-webkit-scrollbar {
+    display: none;
+}
+.values-drag-container {
+    -ms-overflow-style: none;  
+    scrollbar-width: none;  
+}
+
+/* CARD NẰM NGANG - TỈ LỆ 3 ẢNH/MÀN HÌNH */
+.value-card-landscape {
+    /* Ép đúng 1/3 chiều rộng màn hình trừ đi khoảng cách gap */
+    flex: 0 0 calc(33.33% - 20px); 
+    height: 300px; /* Chiều cao thấp hơn chiều rộng để tạo dáng ngang */
+    background: #111;
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    scroll-snap-align: center; /* Hít vào giữa khi dừng kéo */
+    border: 1px solid #222;
+    transition: all 0.4s ease;
+}
+
+.value-card-landscape:hover {
+    border-color: #4CB5F9;
+    transform: translateY(-5px);
+}
+
+.value-card-landscape img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.5); /* Mặc định tối hơn */
+    transition: 0.5s ease;
+}
+
+.value-card-landscape:hover img {
+    filter: brightness(0.8); /* Sáng hơn khi hover */
+}
+
+.value-card-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 25px;
+    background: linear-gradient(transparent, rgba(0,0,0,0.9));
+    color: white;
+    text-align: center;
+}
+
+.value-card-info h4 {
+    font-size: 1.5rem;
+    color: #4CB5F9;
+    margin: 0 0 5px 0;
+}
+
+/* =========================================================
+   BOOKING PAGE SECTION
+   ========================================================= */
+.booking-wrapper { 
+    padding: 100px 20px 60px 20px; 
+    background-color: #f4f7f6; 
+    min-height: 80vh; 
+}
+
+.booking-box { 
+    max-width: 1000px; 
+    margin: 0 auto; 
+    background: white; 
+    padding: 40px; 
+    border-radius: 20px; 
+    box-shadow: 0 15px 40px rgba(0,0,0,0.08); 
+}
+
+.booking-title { 
+    font-family: 'Playfair Display', serif; 
+    font-size: 2.5rem; 
+    color: #0056A3; 
+    margin-bottom: 30px; 
+    font-weight: 700; 
+    text-align: center; 
+}
+
+/* Các tùy chọn Khứ hồi / Một chiều */
+.trip-type-options { 
+    display: flex; 
+    gap: 30px; 
+    margin-bottom: 25px; 
+    border-bottom: 1px solid #eee; 
+    padding-bottom: 15px; 
+}
+
+.trip-type-options label { 
+    font-weight: 600; 
+    color: #333; 
+    cursor: pointer; 
+    display: flex; 
+    align-items: center; 
+    gap: 8px; 
+}
+
+/* Lưới Form */
+.form-grid { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr 1fr 1fr; 
+    gap: 20px; 
+}
+
+.form-group { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 8px; 
+}
+
+.form-group label { 
+    font-weight: 600; 
+    color: #555; 
+    font-size: 0.9rem; 
+    text-transform: uppercase; 
+    letter-spacing: 0.5px; 
+}
+
+.form-group input, 
+.form-group select { 
+    padding: 14px 15px; 
+    border: 1px solid #ddd; 
+    border-radius: 10px; 
+    font-size: 1rem; 
+    color: #111; 
+    background: #fafafa; 
+    transition: border 0.3s; 
+    width: 100%; 
+}
+
+.form-group input:focus, 
+.form-group select:focus { 
+    border-color: #4CB5F9; 
+    outline: none; 
+    background: #fff; 
+}
+
+/* Nút Submit */
+.search-btn-wrapper { 
+    grid-column: 1 / -1; 
+    display: flex; 
+    justify-content: flex-end; 
+    margin-top: 15px; 
+}
+
+.search-btn { 
+    background: #0056A3; 
+    color: white; 
+    padding: 16px 40px; 
+    border: none; 
+    border-radius: 50px; 
+    font-size: 1.1rem; 
+    font-weight: 700; 
+    cursor: pointer; 
+    transition: background 0.3s; 
+}
+
+.search-btn:hover { 
+    background: #004080; 
+}

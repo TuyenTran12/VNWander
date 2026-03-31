@@ -1,73 +1,91 @@
 import streamlit as st
-import os
+import datetime
 from config.languages import CONTENT
-from utils.helpers import get_local_img_url
 from utils.session_init import init_session_state
+from utils.helpers import load_all_global_css  # Import hàm load CSS
+from components.navbar import render_navbar
+from components.footer import render_footer
 
-# Load external CSS
-def load_css(file_name):
-    if os.path.exists(file_name):
-        with open(file_name, encoding="utf-8") as f:
-            st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
-
-# Initialize page configuration
+# 1. Khởi tạo trang
 st.set_page_config(page_title="VNWander | Book Tickets", layout="wide")
 init_session_state()
 
-# Fetch localized content
-L = CONTENT[st.session_state.lang]
+# Load toàn bộ CSS (Giúp kết nối với file CSS vừa tách)
+load_all_global_css()
 
-# Apply styles
-load_css("assets/css/style.css")
+# 2. Xử lý ngôn ngữ đồng bộ với URL
+if "lang" in st.query_params:
+    st.session_state.lang = st.query_params["lang"]
+elif 'lang' not in st.session_state:
+    st.session_state.lang = 'vi'
 
-# Render navigation bar using component (consistent with other pages)
-from components.navbar import render_navbar
-render_navbar()
+# Sử dụng .get() để lấy dữ liệu an toàn
+L = CONTENT.get(st.session_state.lang, {})
+B = L.get('booking', {}) 
 
-# Render Language Toggle Button
-st.markdown('<div class="lang-button-container">', unsafe_allow_html=True)
-if st.button("ENG" if st.session_state.lang == 'vi' else "VIE", key="lang-toggle"):
-    st.session_state.lang = 'en' if st.session_state.lang == 'vi' else 'vi'
-    st.rerun()
-st.markdown('</div>', unsafe_allow_html=True)
+# Render Navbar
+render_navbar(current_page_path="/Booking")
 
-# Booking Form Section
-st.markdown(f"""
-<div class="booking-search-bar">
-    <div class="booking-container">
-        <div class="booking-title">{L['booking']['title']}</div>
-        <form class="booking-form">
-            <div class="form-group">
-                <label for="destination">{L['booking']['destination']}</label>
-                <select id="destination">
-                    <option value="">-- {L['booking']['select_destination']} --</option>
-                    <option value="">Hà Nội</option>
-                    <option value="">Hồ Chí Minh</option>
-                    <option value="">Đà Nẵng</option>
-                    <option value="">Nha Trang</option>
-                    <option value="">Phú Quốc</option>
-                    <option value="">Đà Lạt</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="checkin">{L['booking']['checkin']}</label>
-                <input type="date" id="checkin" name="checkin">
-            </div>
-            <div class="form-group">
-                <label for="checkout">{L['booking']['checkout']}</label>
-                <input type="date" id="checkout" name="checkout">
-            </div>
-            <div class="form-group guests">
-                <label for="guests">{L['booking']['guests']}</label>
-                <select id="guests" name="guests">
-                    <option value="1">1 {L['booking']['guest']}</option>
-                    <option value="2">2 {L['booking']['guests_plural']}</option>
-                    <option value="3">3 {L['booking']['guests_plural']}</option>
-                    <option value="4">4+ {L['booking']['guests_plural']}</option>
-                </select>
-            </div>
-            <button type="submit" class="search-btn">{L['booking']['search_button']}</button>
-        </form>
-    </div>
+# 3. Lấy ngày hiện tại và ngày mai bằng Python
+today = datetime.date.today().strftime("%Y-%m-%d")
+tomorrow = (datetime.date.today() + datetime.timedelta(days=2)).strftime("%Y-%m-%d")
+
+# 4. KHỐI HTML (Đã được dọn dẹp sạch sẽ CSS)
+booking_html = f"""
+<div class="booking-wrapper">
+<div class="booking-box">
+<div class="booking-title">{B.get('title', 'Tìm chuyến bay & Đặt phòng')}</div>
+
+<form class="booking-form">
+<div class="trip-type-options">
+<label><input type="radio" name="trip_type" checked> {B.get('round_trip', 'Khứ hồi')}</label>
+<label><input type="radio" name="trip_type"> {B.get('one_way', 'Một chiều')}</label>
 </div>
-""", unsafe_allow_html=True)
+
+<div class="form-grid">
+<div class="form-group">
+<label>{B.get('from', 'Điểm khởi hành')}</label>
+<select>
+<option value="SGN">Hồ Chí Minh (SGN)</option>
+<option value="HAN">Hà Nội (HAN)</option>
+<option value="DAD">Đà Nẵng (DAD)</option>
+<option value="PQC">Phú Quốc (PQC)</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>{B.get('to', 'Điểm đến')}</label>
+<select>
+<option value="HAN">Hà Nội (HAN)</option>
+<option value="SGN">Hồ Chí Minh (SGN)</option>
+<option value="DAD">Đà Nẵng (DAD)</option>
+<option value="DLI">Đà Lạt (DLI)</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>{B.get('depart_date', 'Ngày đi')}</label>
+<input type="date" value="{today}">
+</div>
+
+<div class="form-group" style="grid-column: span 2;">
+<label>{B.get('passengers_class', 'Hành khách & Hạng ghế')}</label>
+<select>
+<option>1 {B.get('adult', 'Người lớn')}, Phổ thông</option>
+<option>2 {B.get('adult', 'Người lớn')}, Phổ thông</option>
+<option>1 {B.get('adult', 'Người lớn')}, Thương gia</option>
+<option>Gia đình (4+ người)</option>
+</select>
+</div>
+
+<div class="search-btn-wrapper">
+<button type="button" class="search-btn">{B.get('search_btn', 'TÌM CHUYẾN ĐI')}</button>
+</div>
+</div>
+</form>
+</div>
+</div>
+"""
+
+st.markdown(booking_html, unsafe_allow_html=True)
+render_footer()
