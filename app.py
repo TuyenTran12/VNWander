@@ -9,7 +9,7 @@ from components.footer import render_footer
 from config.languages_home import CONTENT
 
 # ------------------------------------------------------------------------------
-# Helper: Lấy danh sách thành phố
+# Helper: Extract all cities from the destination data
 # ------------------------------------------------------------------------------
 def get_all_cities(destinations_data):
     cities = set()
@@ -19,12 +19,13 @@ def get_all_cities(destinations_data):
     return sorted(list(cities))
 
 # ------------------------------------------------------------------------------
-# MAIN APP
+# MAIN APP ENTRY POINT
 # ------------------------------------------------------------------------------
 def main():
+    # Configure main page layout
     st.set_page_config(page_title="VNWander - Khám Phá Việt Nam", layout="wide", initial_sidebar_state="collapsed")
     
-    # Load CSS
+    # Load and combine all external CSS files dynamically
     css_files = ["assets/css/base.css", "assets/css/navbar.css", "assets/css/hero.css", "assets/css/components.css", "assets/css/footer.css", "assets/css/style.css"]
     combined_css = ""
     for css_file in css_files:
@@ -34,28 +35,30 @@ def main():
     if combined_css:
         st.markdown(f"<style>{combined_css}</style>", unsafe_allow_html=True)
 
-    # Khởi tạo session state (Có bắt param URL để song ngữ hoạt động mượt)
+    # Initialize localization (i18n) from URL params or default to Vietnamese
     if "lang" in st.query_params:
         st.session_state.lang = st.query_params["lang"]
     elif 'lang' not in st.session_state:
         st.session_state.lang = 'vi'
     lang = st.session_state.lang
     
-    # ── NAVBAR & HERO & SEARCH BAR ─────────────────────────────────────────────
+    # ── RENDER HEADER & HERO ───────────────────────────────────────────────────
     render_navbar(current_page_path="/")
     render_hero()
     
+    # Wrap Search bar in a container to push it up over the Hero section via CSS
     st.markdown('<div class="premium-search-wrapper">', unsafe_allow_html=True)
+    #render_search_bar()
     st.markdown('</div>', unsafe_allow_html=True)
 
-    # ── DỮ LIỆU TỪ NGÔN NGỮ ────────────────────────────────────────────────────
+    # ── FETCH CONTENT DATA BASED ON SELECTED LANGUAGE ──────────────────────────
     D = CONTENT[lang].get('destinations', {})
     A = CONTENT[lang].get('about', {})
     R = CONTENT[lang].get('reviews', {})
-    F = CONTENT[lang].get('features', {}) # Lấy thêm phần Features để chạy song ngữ
+    F = CONTENT[lang].get('features', {})
 
     # ==============================================================================
-    # SECTION 1: ĐIỂM ĐẾN YÊU THÍCH
+    # SECTION 1: FAVORITE DESTINATIONS (4-COLUMN GRID)
     # ==============================================================================
     st.markdown(
         '<div class="section-heading-container">'
@@ -68,16 +71,21 @@ def main():
     regions = D.get('regions', {})
     if regions:
         region_keys = list(regions.keys())
+        
+        # Extract region names safely using the 'label' key
         region_names = [regions[k].get('label', k) for k in region_keys]
         
-        selected_region_name = st.radio("Chọn vùng miền", region_names, horizontal=True, label_visibility="collapsed")
+        # Region selection tabs
+        selected_region_name = st.radio("Choose Region", region_names, horizontal=True, label_visibility="collapsed")
         selected_region_key = region_keys[region_names.index(selected_region_name)]
         cities = regions[selected_region_key].get('cities', [])
         
+        # Build HTML Grid for cities 
         html_cities = '<div class="city-grid">'
         for city in cities:
             c_name = city.get('name', '')
-            c_img = city.get('img', 'https://images.unsplash.com/photo-1522071820081-009f0129c71c') 
+            # Ensure fallback image URL is provided to prevent KeyError crashes
+            c_img = city.get('img', 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=800') 
             
             html_cities += (
                 f'<div class="city-card-premium">'
@@ -90,13 +98,13 @@ def main():
         html_cities += (
             '</div>'
             '<div style="text-align: center; margin-top: 40px;">'
-            f'<a href="/Destinations" target="_self" class="explore-btn">{D.get("cta_label", "Khám phá thêm")} <span class="arrow">→</span></a>'
+            f'<a href="/Destinations" target="_self" class="explore-btn">{D.get("cta_label", "Explore More")} <span class="arrow">→</span></a>'
             '</div>'
         )
         st.markdown(html_cities, unsafe_allow_html=True)
 
     # ==============================================================================
-    # SECTION 2: WHY CHOOSE US & CEO QUOTE (SONG NGỮ HOÀN TOÀN)
+    # SECTION 2: WHY CHOOSE US & CEO QUOTE (FULLY BILINGUAL)
     # ==============================================================================
     html_about = (
         '<section class="feature-section">'
@@ -108,7 +116,7 @@ def main():
         '<div class="feature-grid">'
     )
     
-    # Lấy list tính năng từ file ngôn ngữ thay vì gõ cứng
+    # Iterate over features list from language file
     for f_item in F.get('items', []):
         html_about += (
             f'<div class="feature-card">'
@@ -119,18 +127,18 @@ def main():
         )
     html_about += '</div>'
     
-    # ── CEO QUOTE: ẢNH BÊN TRÁI BỰ - CHỮ BÊN PHẢI ──
+    # ── CEO QUOTE: LARGE IMAGE ON THE LEFT, TEXT ON THE RIGHT ──
     if A.get('ceo_quote'):
         html_about += (
             '<div style="margin-top: 80px;">'
             '<div class="ceo-quote-box" style="display: flex; flex-direction: row; align-items: center; gap: 50px; text-align: left; padding: 50px; background: #f8faff; border-radius: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">'
                 
-                # Cột trái: Ảnh CEO cực to (200px)
+                # Left Column: Large CEO Image (200px)
                 '<div style="flex-shrink: 0;">'
                     f'<img src="{A.get("ceo_img", "https://randomuser.me/api/portraits/men/32.jpg")}" style="width: 200px; height: 200px; border-radius: 20px; object-fit: cover; box-shadow: 0 15px 35px rgba(0,86,163,0.15); border: 4px solid #ffffff;">'
                 '</div>'
                 
-                # Cột phải: Nội dung Quote và Tên
+                # Right Column: Quote content and author info
                 '<div style="flex: 1;">'
                     '<div class="quote-icon" style="position: static; font-size: 5rem; color: #dbeafe; line-height: 0.8; margin-bottom: 10px; font-family: serif;">"</div>'
                     f'<p class="ceo-text" style="font-size: 1.25rem; line-height: 1.8; color: #222; font-style: italic; margin-bottom: 25px;">{A.get("ceo_quote", "")}</p>'
@@ -144,10 +152,11 @@ def main():
     st.markdown(html_about, unsafe_allow_html=True)
 
     # ==============================================================================
-    # SECTION 3: REVIEWS (SOCIAL PROOF AUTO SCROLL)
+    # SECTION 3: SOCIAL PROOF (REVIEWS WITH INFINITE AUTO-SCROLL)
     # ==============================================================================
     items = R.get('items', [])
     if items:
+        # Duplicate the items list to ensure seamless infinite scrolling CSS animation
         display_items = items + items 
         html_reviews = (
             '<div class="reviews-section bg-light-grey">'
@@ -176,6 +185,7 @@ def main():
         html_reviews += '</div></div></div></div>'
         st.markdown(html_reviews, unsafe_allow_html=True)
 
+    # ── RENDER FOOTER ──────────────────────────────────────────────────────────
     render_footer()
 
 if __name__ == "__main__":

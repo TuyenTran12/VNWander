@@ -105,7 +105,6 @@ body {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 25px;
-    max-width: 1200px !important;
     margin: 0 auto;
     padding: 0 20px;
 }
@@ -131,6 +130,39 @@ body {
     color: var(--primary-blue);
     text-align: center;
 }
+.city-bg-img {
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    width: 100% !important;  /* Ép rộng 100% thẻ card */
+    height: 100% !important; /* Ép cao 100% thẻ card */
+    object-fit: cover !important; /* Tự động zoom và cắt phần thừa để lấp đầy thẻ */
+    object-position: center !important; /* Luôn giữ trọng tâm bức ảnh ở giữa */
+    transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+    z-index: 1;
+}
+
+.city-overlay {
+    position: absolute; 
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 60%);
+    transition: background 0.4s ease;
+    z-index: 2;
+}
+
+.city-name-title {
+    position: absolute; 
+    bottom: 20px; 
+    left: 0; 
+    right: 0;
+    color: #FFFFFF !important;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    text-align: center;
+    z-index: 10;
+    transition: all 0.4s ease;
+}
 .city-card-premium {
     position: relative;
     height: 250px;
@@ -140,19 +172,9 @@ body {
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
     background-color: #f0f7ff; 
 }
-.city-bg-img {
-    position: absolute; 
-    top: 0; 
-    left: 0; 
-    width: 100% !important;  
-    height: 100% !important; 
-    object-fit: cover !important;
-    object-position: center !important; 
-    transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
-    z-index: 1;
-}
+
 .city-card-premium:hover .city-bg-img { 
-    transform: scale(1.12) !important; 
+    transform: scale(1.12) !important;
 }
 .city-card-premium:hover .city-overlay { 
     background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 100%); 
