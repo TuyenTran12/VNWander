@@ -9,9 +9,19 @@ CONTENT = {
             "subtitle": "Giải pháp thông minh giúp lập kế hoạch nhanh chóng, quyết định tự tin và theo dõi lộ trình dễ dàng.",
             "cta": "Yêu cầu tư vấn"
         },
+        "search": {
+            "from": "Khởi hành từ",
+            "to": "Điểm đến",
+            "depart_date": "Ngày đi",
+            "return_date": "Ngày về",
+            "passengers_class": "Hành khách & Hạng ghế",
+            "adult": "Người lớn",
+            "search_btn": "TÌM CHUYẾN ĐI"
+        },
         "destinations": {
             "title": "Điểm đến yêu thích",
-            "subtitle": "Hãy chọn một điểm đến du lịch nổi tiếng dưới đây để khám phá các chuyến đi độc quyền của chúng tôi với mức giá vô cùng hợp lý.",
+            "explore_label": "KHÁM PHÁ VIỆT NAM",
+            "cta_label": "Khám phá thêm",
             "regions": {
                 "north": {
                     "label": "Miền Bắc",
@@ -61,74 +71,76 @@ CONTENT = {
                 }
             }
         },
-        "about_section": {
-            "why_title": "Vì sao chọn VNWander?",
-            "why_subtitle": "Tự hào là đối tác chiến lược của hơn 20,000 tổ chức uy tín và hàng triệu du khách toàn cầu. Với nền tảng công nghệ tối tân và bề dày kinh nghiệm, chúng tôi tự tin là người bạn đồng hành số 1 của bạn.",
-            "cards": [
-                {"icon": "👥", "title": "Đội ngũ hàng đầu", "desc": "Nhân sự giàu kinh nghiệm, chuyên môn cao và tận tâm, mang đến sự tin tưởng tuyệt đối khi hợp tác."},
-                {"icon": "🔒", "title": "Bảo mật tuyệt đối", "desc": "Cam kết bảo vệ thông tin qua hợp đồng NDA khắt khe. Chỉ nhân sự dự án mới có quyền tiếp cận dữ liệu."},
-                {"icon": "🚀", "title": "Công nghệ tiên phong", "desc": "Liên tục cập nhật công nghệ hiện đại nhất để tối ưu hóa năng suất và mang lại giá trị vượt trội."},
-                {"icon": "🎧", "title": "Hỗ trợ 24/7", "desc": "Mọi nhu cầu của bạn đều được đội ngũ chuyên gia phản hồi và giải quyết nhanh chóng bất kể ngày đêm."}
-            ],
-            "values_title": "Giá trị cốt lõi",
-            "values_list": ["Trung thực tuyệt đối", "Hướng tới khách hàng", "Tinh thần tập thể", "Coi nhau như gia đình", "Quyết liệt hành động", "Cởi mở & Sẻ chia", "Linh hoạt thích ứng", "Luôn là số 1"],
-            "ceo_title_section": "CEO của chúng tôi nói",
-            "ceo_quote": "Nhận thấy thị trường du lịch trong nước chưa có một nền tảng công nghệ đủ tốt, sứ mệnh của VNWander là mang đến lợi ích tối đa cho khách hàng thông qua các giải pháp công nghệ tiên phong, đầy sáng tạo. Chúng tôi khát khao trở thành nền tảng cốt lõi tạo nên sự thịnh vượng, nâng tầm vị thế du lịch Việt Nam trên đấu trường khu vực và vươn xa đến tầm quốc tế.",
-            "ceo_name": "Trần Bình Giang",
-            "ceo_pos": "CEO & Founder"
+        "features": {
+            "eyebrow": "VÌ SAO CHỌN VNWANDER",
+            "title": "Hành Trình Được Thiết Kế Bằng Đam Mê",
+            "items": [
+                {"icon": "🌟", "title": "Trải Nghiệm Cao Cấp", "desc": "Mọi dịch vụ đều được tuyển chọn kỹ lưỡng, mang đến chất lượng 5 sao cho chuyến đi của bạn."},
+                {"icon": "🛡️", "title": "An Tâm Tuyệt Đối", "desc": "Hỗ trợ 24/7 trong suốt hành trình, đảm bảo an toàn và xử lý rủi ro nhanh chóng."},
+                {"icon": "💡", "title": "Thiết Kế Cá Nhân Hóa", "desc": "Lịch trình linh hoạt, thiết kế riêng theo sở thích và yêu cầu đặc biệt của bạn."},
+                {"icon": "💎", "title": "Giá Trị Đích Thực", "desc": "Không phí ẩn, cam kết mang lại giá trị trải nghiệm vượt xa chi phí bạn bỏ ra."}
+            ]
         },
-        "booking": {
-            "title": "Tìm chuyến bay & Đặt phòng",
-            "round_trip": "Khứ hồi",
-            "one_way": "Một chiều",
-            "from": "Điểm khởi hành",
-            "to": "Điểm đến",
-            "depart_date": "Ngày đi",
-            "return_date": "Ngày về",
-            "passengers_class": "Số lượng vé & Hạng ghế",
-            "adult": "Người lớn",
-            "search_btn": "TÌM CHUYẾN ĐI"
+        "about": {
+            "ceo_quote": "Hành trình vạn dặm bắt đầu từ một bước chân. Tại VNWander, chúng tôi biến mỗi bước chân đó thành một kỷ niệm vô giá.",
+            "ceo_name": "Trần Bình Giang",
+            "ceo_pos": "CEO & Founder VNWander",
+            "ceo_img": "https://randomuser.me/api/portraits/men/32.jpg"
         },
         "reviews": {
-            "label": "ĐÁNH GIÁ KHÁCH HÀNG",
-            "title": "Những Chuyến Đi Chân Thực",
-            "cta_label": "Chi tiết",
+            "label": "CÂU CHUYỆN KHÁCH HÀNG",
+            "title": "Khách Hàng Nói Gì Về Chúng Tôi",
+            "cta_label": "Xem chi tiết",
             "items": [
                 {
                     "name": "Nguyễn Văn Tuấn",
                     "date": "15/03/2026",
                     "rating": 5,
                     "testimonial": "Tuyệt vời!",
-                    "detailed_review": "Chuyến đi thực sự vượt quá mong đợi của tôi. Nền tảng VNWander giúp mọi bước lên lịch trình trở nên dễ dàng."
+                    "detailed_review": "Chuyến đi này hoàn toàn vượt qua mong đợi của tôi. Nền tảng VNWander giúp mọi bước lập kế hoạch trở nên dễ dàng."
                 },
                 {
                     "name": "Lê Thị B",
                     "date": "14/03/2026",
                     "rating": 5,
                     "testimonial": "Rất tốt!",
-                    "detailed_review": "Chuyến đi tuyệt vời! Mọi thứ đều được chuẩn bị chu đáo và đúng như mong đợi. Tôi sẽ tiếp tục sử dụng dịch vụ."
+                    "detailed_review": "Chuyến đi tuyệt vời! Mọi thứ đều được chuẩn bị chu đáo và đúng như kỳ vọng. Tôi sẽ tiếp tục sử dụng dịch vụ."
                 },
                 {
                     "name": "Trần Văn C",
                     "date": "10/03/2026",
                     "rating": 5,
-                    "testimonial": "Rất tốt!",
+                    "testimonial": "Rất hài lòng!",
                     "detailed_review": "Trải nghiệm tuyệt vời. Mọi việc diễn ra suôn sẻ. Sẽ giới thiệu cho bạn bè."
                 }
             ]
         }
     },
+    
+    # =========================================================================
+    # ENGLISH LOCALIZATION
+    # =========================================================================
     "en": {
         "hero": {
             "eyebrow": "VNWANDER ENTERPRISE",
             "title_white": "Elevate Your",
-            "title_blue": "Vietnam Travel",
-            "subtitle": "Smart solutions for quick planning, confident decisions, and seamless itinerary tracking.",
+            "title_blue": "Vietnam Journey",
+            "subtitle": "Smart solutions for fast planning, confident decisions, and easy itinerary tracking.",
             "cta": "Request Consultation"
+        },
+        "search": {
+            "from": "Depart from",
+            "to": "Going to",
+            "depart_date": "Depart Date",
+            "return_date": "Return Date",
+            "passengers_class": "Passengers & Class",
+            "adult": "Adult",
+            "search_btn": "SEARCH TRIPS"
         },
         "destinations": {
             "title": "Favorite Destinations",
-            "subtitle": "Select a popular travel destination below to explore our exclusive trips at highly reasonable prices.",
+            "explore_label": "VNWANDER EXPLORE",
+            "cta_label": "Explore More",
             "regions": {
                 "north": {
                     "label": "North Vietnam",
@@ -155,7 +167,7 @@ CONTENT = {
                     ]
                 },
                 "southwest": {
-                    "label": "Mekong Delta",
+                    "label": "Southwest Vietnam",
                     "cities": [
                         {"name": "Can Tho", "img": "https://baocantho.com.vn/image/fckeditor/upload/2025/20250927/images/T3a-1-BSS.webp"},
                         {"name": "Phu Quoc", "img": "https://bcp.cdnchinhphu.vn/334894974524682240/2025/6/23/phu-quoc-17506756503251936667562.jpg"},
@@ -178,37 +190,25 @@ CONTENT = {
                 }
             }
         },
-        "about_section": {
-            "why_title": "Why Choose VNWander?",
-            "why_subtitle": "Proud to be a strategic partner of 20,000+ prestigious organizations and millions of global travelers. With advanced technology and rich experience, we are your #1 companion.",
-            "cards": [
-                {"icon": "👥", "title": "Top-tier Team", "desc": "Experienced, highly specialized, and dedicated personnel, ensuring absolute trust in every partnership."},
-                {"icon": "🔒", "title": "Absolute Security", "desc": "Commitment to information protection through strict NDA contracts. Only project personnel have access to data."},
-                {"icon": "🚀", "title": "Pioneering Tech", "desc": "Constantly updating the most modern technologies to optimize productivity and deliver superior value."},
-                {"icon": "🎧", "title": "24/7 Support", "desc": "All your needs are quickly responded to and resolved by our professional experts, day or night."}
-            ],
-            "values_title": "Core Values",
-            "values_list": ["Absolute Honesty", "Customer-Centric", "Team Spirit", "Treating as Family", "Decisive Action", "Openness & Sharing", "Flexible Adaptation", "Always Number 1"],
-            "ceo_title_section": "What Our CEO Says",
-            "ceo_quote": "Realizing that the domestic tourism market lacked a sufficiently strong technology platform, VNWander's mission is to maximize benefits for customers through pioneering and creative travel tech solutions. We aspire to be the core platform for prosperity, elevating Vietnam's tourism status regionally and internationally.",
-            "ceo_name": "Binh Giang Tran",
-            "ceo_pos": "CEO & Founder"
+        "features": {
+            "eyebrow": "WHY CHOOSE VNWANDER",
+            "title": "Journeys Designed with Passion",
+            "items": [
+                {"icon": "🌟", "title": "Premium Experience", "desc": "Every service is carefully selected, bringing 5-star quality to your trip."},
+                {"icon": "🛡️", "title": "Absolute Peace of Mind", "desc": "24/7 support throughout the journey, ensuring safety and rapid risk handling."},
+                {"icon": "💡", "title": "Personalized Design", "desc": "Flexible itineraries, tailored to your preferences and special requests."},
+                {"icon": "💎", "title": "True Value", "desc": "No hidden fees, committed to delivering experience value far beyond your costs."}
+            ]
         },
-        "booking": {
-            "title": "Search Flights & Hotels",
-            "round_trip": "Round-trip",
-            "one_way": "One-way",
-            "from": "Leaving from",
-            "to": "Going to",
-            "depart_date": "Depart Date",
-            "return_date": "Return Date",
-            "passengers_class": "Passengers & Class",
-            "adult": "Adult",
-            "search_btn": "SEARCH TRIPS"
+        "about": {
+            "ceo_quote": "A journey of a thousand miles begins with a single step. At VNWander, we turn each step into a priceless memory.",
+            "ceo_name": "Tran Binh Giang",
+            "ceo_pos": "CEO & Founder VNWander",
+            "ceo_img": "https://randomuser.me/api/portraits/men/32.jpg"
         },
         "reviews": {
-            "label": "CLIENT FEEDBACK",
-            "title": "Authentic Journeys",
+            "label": "CLIENT STORIES",
+            "title": "What Our Clients Say",
             "cta_label": "Detail",
             "items": [
                 {

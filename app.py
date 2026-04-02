@@ -6,7 +6,7 @@ from components.navbar import render_navbar
 from components.search_bar import render_search_bar
 from components.hero import render_hero
 from components.footer import render_footer
-from config.languages import CONTENT
+from config.languages_home import CONTENT
 
 # ------------------------------------------------------------------------------
 # Helper: Lấy danh sách thành phố
@@ -24,7 +24,7 @@ def get_all_cities(destinations_data):
 def main():
     st.set_page_config(page_title="VNWander - Khám Phá Việt Nam", layout="wide", initial_sidebar_state="collapsed")
     
-    # Load CSS (Giữ nguyên logic của bạn)
+    # Load CSS
     css_files = ["assets/css/base.css", "assets/css/navbar.css", "assets/css/hero.css", "assets/css/components.css", "assets/css/footer.css", "assets/css/style.css"]
     combined_css = ""
     for css_file in css_files:
@@ -34,8 +34,10 @@ def main():
     if combined_css:
         st.markdown(f"<style>{combined_css}</style>", unsafe_allow_html=True)
 
-    # Khởi tạo session state
-    if 'lang' not in st.session_state:
+    # Khởi tạo session state (Có bắt param URL để song ngữ hoạt động mượt)
+    if "lang" in st.query_params:
+        st.session_state.lang = st.query_params["lang"]
+    elif 'lang' not in st.session_state:
         st.session_state.lang = 'vi'
     lang = st.session_state.lang
     
@@ -43,21 +45,21 @@ def main():
     render_navbar(current_page_path="/")
     render_hero()
     
-    # Bao bọc Search bar trong container để CSS đẩy nó lên trên Hero
     st.markdown('<div class="premium-search-wrapper">', unsafe_allow_html=True)
-    render_search_bar()
     st.markdown('</div>', unsafe_allow_html=True)
 
     # ── DỮ LIỆU TỪ NGÔN NGỮ ────────────────────────────────────────────────────
     D = CONTENT[lang].get('destinations', {})
     A = CONTENT[lang].get('about', {})
     R = CONTENT[lang].get('reviews', {})
-# ==============================================================================
+    F = CONTENT[lang].get('features', {}) # Lấy thêm phần Features để chạy song ngữ
+
+    # ==============================================================================
     # SECTION 1: ĐIỂM ĐẾN YÊU THÍCH
     # ==============================================================================
     st.markdown(
         '<div class="section-heading-container">'
-        '<span class="feature-label">KHÁM PHÁ VIỆT NAM</span>'
+        f'<span class="feature-label">{D.get("explore_label", "KHÁM PHÁ VIỆT NAM")}</span>'
         f'<h2 class="section-heading">{D.get("title", "Điểm đến yêu thích")}</h2>'
         '</div>', 
         unsafe_allow_html=True
@@ -66,20 +68,15 @@ def main():
     regions = D.get('regions', {})
     if regions:
         region_keys = list(regions.keys())
-        
-        # SỬA LỖI 1: Lấy tên vùng miền từ key 'label' (ví dụ: "North Vietnam")
         region_names = [regions[k].get('label', k) for k in region_keys]
         
-        # Tabs chuyển vùng miền
         selected_region_name = st.radio("Chọn vùng miền", region_names, horizontal=True, label_visibility="collapsed")
         selected_region_key = region_keys[region_names.index(selected_region_name)]
         cities = regions[selected_region_key].get('cities', [])
         
-        # Build HTML Grid các thành phố
         html_cities = '<div class="city-grid">'
         for city in cities:
             c_name = city.get('name', '')
-            # SỬA LỖI 2: Kéo link ảnh từ key 'img' trong JSON của bạn
             c_img = city.get('img', 'https://images.unsplash.com/photo-1522071820081-009f0129c71c') 
             
             html_cities += (
@@ -99,43 +96,48 @@ def main():
         st.markdown(html_cities, unsafe_allow_html=True)
 
     # ==============================================================================
-    # SECTION 2: WHY CHOOSE US & CEO QUOTE (NIỀM TIN KHÁCH HÀNG)
+    # SECTION 2: WHY CHOOSE US & CEO QUOTE (SONG NGỮ HOÀN TOÀN)
     # ==============================================================================
-    features = [
-        {"icon": "🌟", "title": "Trải Nghiệm Cao Cấp", "desc": "Mọi dịch vụ đều được tuyển chọn kỹ lưỡng, mang đến chất lượng 5 sao cho chuyến đi của bạn."},
-        {"icon": "🛡️", "title": "An Tâm Tuyệt Đối", "desc": "Hỗ trợ 24/7 trong suốt hành trình, đảm bảo an toàn và xử lý rủi ro nhanh chóng."},
-        {"icon": "💡", "title": "Thiết Kế Cá Nhân Hóa", "desc": "Lịch trình linh hoạt, thiết kế riêng theo sở thích và yêu cầu đặc biệt của bạn."},
-        {"icon": "💎", "title": "Giá Trị Đích Thực", "desc": "Không phí ẩn, cam kết mang lại giá trị trải nghiệm vượt xa chi phí bạn bỏ ra."}
-    ]
-    
     html_about = (
         '<section class="feature-section">'
         '<div class="contained-content">'
         '<div class="feature-header">'
-        '<span class="feature-label">VÌ SAO CHỌN VNWANDER</span>'
-        '<h2 class="section-heading">Hành Trình Được Thiết Kế Bằng Đam Mê</h2>'
+        f'<span class="feature-label">{F.get("eyebrow", "VÌ SAO CHỌN VNWANDER")}</span>'
+        f'<h2 class="section-heading">{F.get("title", "Hành Trình Được Thiết Kế Bằng Đam Mê")}</h2>'
         '</div>'
         '<div class="feature-grid">'
     )
-    for f in features:
+    
+    # Lấy list tính năng từ file ngôn ngữ thay vì gõ cứng
+    for f_item in F.get('items', []):
         html_about += (
             f'<div class="feature-card">'
-            f'<span class="feature-icon">{f["icon"]}</span>'
-            f'<h3 class="feature-card-title">{f["title"]}</h3>'
-            f'<p class="feature-card-desc">{f["desc"]}</p>'
+            f'<span class="feature-icon">{f_item.get("icon", "🌟")}</span>'
+            f'<h3 class="feature-card-title">{f_item.get("title", "")}</h3>'
+            f'<p class="feature-card-desc">{f_item.get("desc", "")}</p>'
             f'</div>'
         )
     html_about += '</div>'
     
-    # CEO Quote chèn ngay dưới Why Choose Us
+    # ── CEO QUOTE: ẢNH BÊN TRÁI BỰ - CHỮ BÊN PHẢI ──
     if A.get('ceo_quote'):
         html_about += (
             '<div style="margin-top: 80px;">'
-            '<div class="ceo-quote-box">'
-            '<div class="quote-icon">"</div>'
-            f'<p class="ceo-text">{A.get("ceo_quote", "")}</p>'
-            f'<div class="ceo-author">{A.get("ceo_name", "")}</div>'
-            f'<div class="ceo-title">{A.get("ceo_pos", "")}</div>'
+            '<div class="ceo-quote-box" style="display: flex; flex-direction: row; align-items: center; gap: 50px; text-align: left; padding: 50px; background: #f8faff; border-radius: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">'
+                
+                # Cột trái: Ảnh CEO cực to (200px)
+                '<div style="flex-shrink: 0;">'
+                    f'<img src="{A.get("ceo_img", "https://randomuser.me/api/portraits/men/32.jpg")}" style="width: 200px; height: 200px; border-radius: 20px; object-fit: cover; box-shadow: 0 15px 35px rgba(0,86,163,0.15); border: 4px solid #ffffff;">'
+                '</div>'
+                
+                # Cột phải: Nội dung Quote và Tên
+                '<div style="flex: 1;">'
+                    '<div class="quote-icon" style="position: static; font-size: 5rem; color: #dbeafe; line-height: 0.8; margin-bottom: 10px; font-family: serif;">"</div>'
+                    f'<p class="ceo-text" style="font-size: 1.25rem; line-height: 1.8; color: #222; font-style: italic; margin-bottom: 25px;">{A.get("ceo_quote", "")}</p>'
+                    f'<div class="ceo-author" style="font-size: 1.4rem; font-weight: 800; color: #0056A3;">{A.get("ceo_name", "")}</div>'
+                    f'<div class="ceo-title" style="font-size: 0.9rem; color: #666; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 600; margin-top: 5px;">{A.get("ceo_pos", "")}</div>'
+                '</div>'
+                
             '</div></div>'
         )
     html_about += '</div></section>'
@@ -146,13 +148,12 @@ def main():
     # ==============================================================================
     items = R.get('items', [])
     if items:
-        # Nhân đôi list để animation scroll được mượt và vô tận
         display_items = items + items 
         html_reviews = (
             '<div class="reviews-section bg-light-grey">'
             '<div class="contained-content">'
             '<div class="feature-header">'
-            '<span class="feature-label">CÂU CHUYỆN KHÁCH HÀNG</span>'
+            f'<span class="feature-label">{R.get("label", "CÂU CHUYỆN KHÁCH HÀNG")}</span>'
             f'<h2 class="section-heading">{R.get("title", "Khách Hàng Nói Gì Về Chúng Tôi")}</h2>'
             '</div>'
             '<div class="reviews-scroll-container">'

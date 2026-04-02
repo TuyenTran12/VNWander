@@ -3,7 +3,7 @@ from components.navbar import render_navbar
 from components.footer import render_footer
 from utils.helpers import load_all_global_css
 from utils.session_init import init_session_state
-from config.languages import CONTENT
+from config.languages_team import CONTENT
 
 # ── Page config ────────────────────────────────────────────────────────────────
 st.set_page_config(page_title="VNWander - Đội ngũ", layout="wide")
