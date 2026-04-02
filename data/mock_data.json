@@ -1,0 +1,162 @@
+{
+  "properties": [
+    {
+      "id": 1,
+      "name": "Hanoi Pearl Hotel",
+      "city": "Hanoi",
+      "address": "20 Hang Trong, Hoan Kiem",
+      "star_rating": 5,
+      "description": "Luxury hotel with lake views, just steps from Hoan Kiem Lake.",
+      "amenities": ["Free WiFi", "Swimming Pool", "Spa", "Restaurant", "Parking"],
+      "policies": "Check-in: 14:00, Check-out: 12:00. Free cancellation up to 3 days prior.",
+      "images": ["https://via.placeholder.com/800x400?text=Hanoi+Pearl+1"],
+      "rooms": [
+        {
+          "id": 1,
+          "name": "Deluxe King Room",
+          "max_occupancy": 2,
+          "bed_configuration": "1 King Bed",
+          "price_per_night": 2500000,
+          "amenities": ["Air Conditioning", "TV", "Minibar"]
+        },
+        {
+          "id": 2,
+          "name": "Twin Room",
+          "max_occupancy": 2,
+          "bed_configuration": "2 Single Beds",
+          "price_per_night": 2200000,
+          "amenities": ["Air Conditioning", "TV"]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Sapa Eco Lodge",
+      "city": "Sapa",
+      "address": "Ta Van, Sapa",
+      "star_rating": 4,
+      "description": "Eco-friendly lodge with breathtaking mountain views.",
+      "amenities": ["Free WiFi", "Breakfast", "Restaurant", "Trekking"],
+      "policies": "Check-in: 14:00, Check-out: 11:00. Non-refundable.",
+      "images": ["https://via.placeholder.com/800x400?text=Sapa+Eco+Lodge"],
+      "rooms": [
+        {
+          "id": 3,
+          "name": "Mountain View Room",
+          "max_occupancy": 2,
+          "bed_configuration": "1 Queen Bed",
+          "price_per_night": 1800000,
+          "amenities": ["Heater", "Mountain View"]
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Danang Beach Resort",
+      "city": "Da Nang",
+      "address": "Vo Nguyen Giap, Son Tra",
+      "star_rating": 5,
+      "description": "Beachfront resort with infinity pool and private beach.",
+      "amenities": ["Free WiFi", "Pool", "Spa", "Beachfront", "Restaurant", "Kids Club"],
+      "policies": "Check-in: 15:00, Check-out: 12:00. Free cancellation up to 7 days prior.",
+      "images": ["https://via.placeholder.com/800x400?text=Danang+Beach+Resort"],
+      "rooms": [
+        {
+          "id": 4,
+          "name": "Oceanfront Deluxe",
+          "max_occupancy": 2,
+          "bed_configuration": "1 King Bed",
+          "price_per_night": 3800000,
+          "amenities": ["Balcony", "Ocean View"]
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Hoi An Ancient Homestay",
+      "city": "Hoi An",
+      "address": "98 Nguyen Thai Hoc, Hoi An",
+      "star_rating": 3,
+      "description": "Traditional Vietnamese homestay in the ancient town.",
+      "amenities": ["Free WiFi", "Breakfast", "Bicycles"],
+      "policies": "Check-in: 14:00, Check-out: 12:00. Cancellation allowed up to 2 days prior.",
+      "images": ["https://via.placeholder.com/800x400?text=Hoi+An+Homestay"],
+      "rooms": [
+        {
+          "id": 5,
+          "name": "Standard Double",
+          "max_occupancy": 2,
+          "bed_configuration": "1 Double Bed",
+          "price_per_night": 800000,
+          "amenities": ["Fan", "TV"]
+        },
+        {
+          "id": 6,
+          "name": "Superior Twin",
+          "max_occupancy": 2,
+          "bed_configuration": "2 Single Beds",
+          "price_per_night": 950000,
+          "amenities": ["Air Conditioning", "TV"]
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Dalat Luxury Villa",
+      "city": "Da Lat",
+      "address": "1 Tran Hung Dao, Da Lat",
+      "star_rating": 5,
+      "description": "Private villa with garden and mountain views.",
+      "amenities": ["Free WiFi", "Pool", "Kitchen", "Fireplace", "Garden"],
+      "policies": "Check-in: 14:00, Check-out: 11:00. Non-refundable.",
+      "images": ["https://via.placeholder.com/800x400?text=Dalat+Villa"],
+      "rooms": [
+        {
+          "id": 7,
+          "name": "Master Suite",
+          "max_occupancy": 2,
+          "bed_configuration": "1 King Bed",
+          "price_per_night": 4200000,
+          "amenities": ["Fireplace", "Balcony", "TV"]
+        },
+        {
+          "id": 8,
+          "name": "Garden View Room",
+          "max_occupancy": 2,
+          "bed_configuration": "1 Queen Bed",
+          "price_per_night": 2800000,
+          "amenities": ["TV", "Garden View"]
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Phu Quoc Paradise Resort",
+      "city": "Phu Quoc",
+      "address": "Bai Truong, Phu Quoc",
+      "star_rating": 5,
+      "description": "Luxury resort on Bai Truong beach.",
+      "amenities": ["Free WiFi", "Pool", "Spa", "Beachfront", "Restaurant", "Bar"],
+      "policies": "Check-in: 15:00, Check-out: 12:00. Free cancellation up to 14 days prior.",
+      "images": ["https://via.placeholder.com/800x400?text=Phu+Quoc+Resort"],
+      "rooms": [
+        {
+          "id": 9,
+          "name": "Deluxe Pool View",
+          "max_occupancy": 2,
+          "bed_configuration": "1 King Bed",
+          "price_per_night": 3200000,
+          "amenities": ["TV", "Minibar", "Terrace"]
+        },
+        {
+          "id": 10,
+          "name": "Beachfront Villa",
+          "max_occupancy": 4,
+          "bed_configuration": "2 King Beds",
+          "price_per_night": 9500000,
+          "amenities": ["Private Pool", "Kitchen", "Butler Service"]
+        }
+      ]
+    }
+  ]
+}

@@ -62,135 +62,64 @@ div[data-testid="stRadio"] label input:checked ~ div p {
    ========================================================= */
 .city-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, 1fr) !important;
     gap: 20px;
-    padding: 10px 20px 0px 20px !important;
     max-width: 1200px;
     margin: 0 auto;
+    padding: 0 20px;
 }
 
 .city-card-premium {
     position: relative;
-    height: 190px;
-    border-radius: 12px;
+    height: 220px;
+    border-radius: 16px;
     overflow: hidden;
     cursor: pointer;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-    transform: translateZ(0); /* Bật tăng tốc GPU */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
 }
 
-/* ẢNH NỀN TỐI ƯU (THẺ IMG) */
 .city-bg-img {
     position: absolute;
     top: 0; left: 0;
-    width: 100% !important; 
-    height: 100% !important; 
-    
-    object-fit: cover !important; 
-    object-position: center !important; 
-    
+    width: 100%; height: 100%;
+    object-fit: cover;
     transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
     z-index: 1;
-    user-select: none;
-    -webkit-user-drag: none;
 }
 
-/* LỚP PHỦ ĐEN ĐỂ NỔI CHỮ TRẮNG */
 .city-overlay {
     position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    /* Gradient nhẹ nhàng để ảnh không bị quá tối */
-    background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0) 100%);
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 60%);
     transition: background 0.4s ease;
     z-index: 2;
 }
 
-/* CỤM 4 ẢNH TRANG TRÍ GÓC TRÊN PHẢI */
-.city-decor-grid {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 5px;
-    z-index: 5;
-    opacity: 0.9;
-    transition: opacity 0.3s ease;
-}
-
-.decor-item {
-    width: 30px;
-    height: 30px;
-    background-size: cover;
-    background-position: center;
-    border-radius: 6px;
-    border: 1.5px solid rgba(255, 255, 255, 0.8);
-    box-shadow: 0 2px 5px rgba(0,0,0,0.4);
-}
-
-/* TÊN THÀNH PHỐ (CĂN GIỮA TUYỆT ĐỐI) */
 .city-name-title {
-    display: block;
     position: absolute;
-    top: 50%;
+    bottom: 20px;
     left: 0;
     right: 0;
-    transform: translateY(-50%);
     color: #FFFFFF;
     font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     font-weight: 700;
-    margin: 0;
-    z-index: 10;
     text-align: center;
-    text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
-    pointer-events: none;
-    transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
-    letter-spacing: 0px;
+    z-index: 10;
+    transition: all 0.4s ease;
 }
 
-/* ==========================================
-   HIỆU ỨNG HOVER
-   ========================================== */
-/* 1. Zoom ảnh nền */
 .city-card-premium:hover .city-bg-img {
-    transform: scale(1.08);
+    transform: scale(1.1);
 }
-
-/* 2. Đậm lớp phủ khi hover để chữ rõ hơn */
-.city-card-premium:hover .city-overlay {
-    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.1) 100%);
-}
-
-/* 3. Zoom chữ và giãn khoảng cách (Giữ nguyên màu trắng) */
-.city-card-premium:hover .city-name-title {
-    transform: translateY(-50%) scale(1.08);
-    letter-spacing: 3px;
-    text-shadow: 2px 4px 15px rgba(0,0,0,1);
-}
-
-/* =========================================================
-   RESPONSIVE
-   ========================================================= */
-@media (max-width: 992px) {
-    .city-grid { grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 576px) {
-    .city-grid { grid-template-columns: 1fr; }
-}
-
-/* ==========================================
-   HIỆU ỨNG HOVER 
-   ========================================== */
 
 .city-card-premium:hover .city-overlay {
-    background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.2) 100%);
+    background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 100%);
 }
 
 .city-card-premium:hover .city-name-title {
-    transform: translateY(-50%) scale(1.08) !important;    
-    letter-spacing: 3px !important;    
-    text-shadow: 2px 4px 15px rgba(0,0,0,1) !important; 
+    transform: translateY(-5px);
+    letter-spacing: 2px;
 }
 
 /* Explore More Button */
@@ -198,317 +127,315 @@ div[data-testid="stRadio"] label input:checked ~ div p {
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    background: transparent;
+    background: #f0f7ff;
     color: #0056A3 !important;
-    border: 2px solid #0056A3;
-    padding: 0.9rem 2.5rem;
+    border: 1px solid #dbeafe;
+    padding: 12px 30px;
     border-radius: 50px;
+    font-weight: 700;
     text-decoration: none !important;
-    font-size: 1rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    transition: all 0.3s ease;
-    margin: 2rem auto;
+    transition: 0.3s ease;
 }
 
 .explore-btn:hover {
     background: #0056A3;
     color: #FFFFFF !important;
     transform: translateY(-2px);
-}
-
-.explore-btn .arrow {
-    font-size: 1.2rem;
-    transition: transform 0.2s ease;
+    box-shadow: 0 10px 20px rgba(0,86,163,0.2);
 }
 
 .explore-btn:hover .arrow {
-    transform: translateX(4px);
+    transform: translateX(5px);
 }
 
-/* ==========================================
-   XỬ LÝ ẢNH NỀN TỐI ƯU HIỆU NĂNG (DÙNG THẺ IMG)
-   ========================================== */
-.city-bg-img {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; 
-    height: 100%;
-    object-fit: cover; 
-    object-position: center;
-    transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
-    z-index: 1;
-    /* Không cho người dùng bôi đen hay kéo thả ảnh */
-    user-select: none;
-    -webkit-user-drag: none;
+/* =========================================================
+   PREMIUM SEARCH BAR (STREAMLIT NATIVE OVERRIDE)
+   ========================================================= */
+
+.premium-search-wrapper {
+    background-color: #ffffff;
+    padding: 20px 25px;
+    border-radius: 16px;
+    box-shadow: 0px 15px 40px rgba(0, 86, 163, 0.1);
+    margin: -60px auto 40px auto;
+    max-width: 1050px;
+    position: relative;
+    z-index: 100;
 }
 
-.city-card-premium:hover .city-bg-img {
-    transform: scale(1.08);
+div[data-baseweb="select"] span, 
+div[data-baseweb="input"] input {
+    color: #111111 !important;
+    font-weight: 600 !important;
 }
 
-/* Responsive adjustments for city cards */
-@media (max-width: 992px) {
-    .city-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .city-image-container {
-        height: 180px;
-    }
-
-    .city-name {
-        font-size: 1.1rem;
-    }
+button[data-testid="baseButton-primary"] {
+    background-color: #0056A3 !important;
+    color: #ffffff !important;
+    border-radius: 12px !important;
+    font-weight: 700 !important;
+    height: 48px !important;
+    transition: all 0.3s ease !important;
 }
 
-@media (max-width: 576px) {
-    .city-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .city-image-container {
-        height: 160px;
-    }
+button[data-testid="baseButton-primary"]:hover {
+    background-color: #004080 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 86, 163, 0.3);
 }
 
-/* Feature Card Styling (Why Choose Us Section) */
-.feature-section {
-    padding: 80px 0;
-    background-color: #FFFFFF;
+/* =========================================================
+   HOMEPAGE PREMIUM STYLES – Global & Headings
+   ========================================================= */
+
+.contained-content {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 80px 20px;
+}
+
+.bg-light-grey {
+    background-color: #f8faff;
+}
+
+.section-heading-container {
+    text-align: center;
+    margin-top: 60px;
+}
+
+.feature-label {
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: #4CB5F9;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.section-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    font-weight: 800;
+    color: #0056A3 !important;
+    margin: 0 0 40px 0;
+    text-align: center;
 }
 
 .feature-header {
     text-align: center;
-    max-width: 800px;
-    margin: 0 auto 60px auto;
+    margin-bottom: 50px;
 }
 
-.feature-label {
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: #0056A3;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-bottom: 15px;
+/* =========================================================
+   FEATURE SECTION (Why Choose Us)
+   ========================================================= */
+
+.feature-section {
+    background-color: #FFFFFF;
 }
 
-/* Feature Grid Layout */
 .feature-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 30px;
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 2rem;
 }
 
-/* Feature Card Styling */
 .feature-card {
-    padding: 35px 25px;
-    background: #FFFFFF;
-    border: 1px solid #E2E8F0;
-    border-radius: 12px;
+    padding: 40px 30px;
+    background: #ffffff;
+    border: 1px solid #f0f0f0;
+    border-radius: 20px;
     transition: all 0.3s ease;
     text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.02);
 }
 
-/* Card Hover Effect */
 .feature-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
-    border-color: #0056A3;
+    box-shadow: 0 20px 40px rgba(0, 86, 163, 0.08);
+    border-color: #dbeafe;
 }
 
-/* Icon Container */
 .feature-icon {
-    font-size: 2.5rem;
-    margin-bottom: 25px;
+    font-size: 2.8rem;
+    margin-bottom: 20px;
     display: block;
 }
 
-/* Feature Title */
 .feature-card-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.4rem;
-    font-weight: 600;
-    color: #000000 !important;
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: #0056A3 !important;
     margin-bottom: 15px;
 }
 
-/* Feature Description */
 .feature-card-desc {
     font-size: 1rem;
-    color: #4A5568;
+    color: #444444 !important;
     line-height: 1.6;
 }
 
-/* Section Description below title */
-.feature-main-desc {
-    font-size: 1.1rem;
-    color: #4A5568;
-    line-height: 1.7;
-    max-width: 900px;
-    margin: 0 auto 50px auto;
+/* =========================================================
+   CEO QUOTE
+   ========================================================= */
+
+.ceo-quote-box {
+    background: #f8faff;
+    padding: 60px 50px;
+    border-radius: 24px;
+    position: relative;
     text-align: center;
+    border-top: 5px solid #4CB5F9;
 }
 
-/* Responsive for feature grid */
-@media (max-width: 1024px) {
-    .feature-grid { grid-template-columns: repeat(2, 1fr); }
+.quote-icon {
+    font-size: 5rem;
+    color: #dbeafe;
+    position: absolute;
+    top: 10px;
+    left: 30px;
+    font-family: serif;
 }
 
-@media (max-width: 768px) {
-    .feature-grid {
-        grid-template-columns: 1fr;
-    }
+.ceo-text {
+    font-size: 1.3rem;
+    line-height: 1.8;
+    color: #222222 !important;
+    font-style: italic;
+    font-weight: 500;
+    margin-bottom: 30px;
+    position: relative;
+    z-index: 2;
 }
 
-@media (max-width: 640px) {
-    .feature-grid { grid-template-columns: 1fr; }
+.ceo-author {
+    font-weight: 800;
+    color: #0056A3;
+    font-size: 1.2rem;
+}
+
+.ceo-title {
+    color: #666666;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 600;
+    margin-top: 5px;
 }
 
 /* =========================================================
-   REVIEWS AUTO-SCROLL (CHẠY NGANG VÔ TẬN & DÁNG DỌC)
+   REVIEWS AUTO-SCROLL
    ========================================================= */
 
-.bg-white { background-color: var(--bg-white); }
-.bg-light-grey { background-color: var(--bg-light-grey); }
-
-.contained-content {
-    max-width: var(--container-max-width, 1100px);
-    margin: 0 auto;
-    padding: 7rem 2rem; /* Vertical space */
-}
-
-/* 1. KHUNG CHỨA BÊN NGOÀI (Giới hạn vùng nhìn thấy) */
 .reviews-scroll-container {
     width: 100%;
     overflow: hidden;
-    padding: 40px 0;
     position: relative;
+    padding-bottom: 20px;
 }
 
-/* 2. ĐƯỜNG CHẠY BÊN TRONG (Chứa tất cả các thẻ) */
 .reviews-track {
     display: flex;
-    width: max-content; /* Đảm bảo trải dài đủ tất cả các thẻ */
-    /* Chạy sang trái trong 40 giây, chạy đều (linear) và lặp vô tận */
-    animation: scroll-loop 40s linear infinite; 
+    width: max-content;
+    animation: scroll-loop 40s linear infinite;
 }
 
-/* Tạm dừng hiệu ứng khi người dùng rê chuột vào để đọc */
 .reviews-scroll-container:hover .reviews-track {
     animation-play-state: paused;
 }
 
-/* Hiệu ứng dịch chuyển từ 0% đến 50% (vì chúng ta nhân đôi thẻ) */
 @keyframes scroll-loop {
     0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); } 
+    100% { transform: translateX(-50%); }
 }
 
-/* =========================================================
-   THẺ REVIEW (DÁNG DỌC, BO GÓC MỀM MẠI)
-   ========================================================= */
 .review-card-vertical {
-    flex: 0 0 320px; /* Ép cứng chiều rộng 320px */
-    height: 480px;   /* Ép cứng chiều cao 480px -> Tạo hình chữ nhật đứng */
-    
+    flex: 0 0 320px;
+    height: 420px;
     background: #FFFFFF !important;
-    padding: 35px 30px !important;
-    border-radius: 28px !important; /* Bo góc to chuẩn app */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05) !important;
-    margin: 0 15px !important; /* Khoảng cách giữa các thẻ */
-    
-    display: flex !important;
-    flex-direction: column !important;
-    transition: all 0.4s ease !important;
-    border: 1px solid rgba(0,0,0,0.02) !important;
-    white-space: normal !important;
+    padding: 35px 30px;
+    border-radius: 24px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    margin: 0 15px;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.4s ease;
+    border: 1px solid #f0f0f0;
 }
 
 .review-card-vertical:hover {
-    transform: translateY(-8px) scale(1.02) !important;
-    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.12) !important;
+    transform: translateY(-8px);
+    box-shadow: 0 20px 45px rgba(0, 86, 163, 0.1);
+    border-color: #dbeafe;
 }
 
-/* =========================================================
-   REVIEW
-   ========================================================= */
-/* Reviewer Meta (Name, Date) */
-.reviewer-meta { margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem; }
-.reviewer-name { 
-    font-weight: 600; 
-    font-size: 1.05rem; 
-    color: #000000 !important; 
-}
-.review-date { font-size: 0.85rem; color: #718096; }
-
-/* Star Rating - Solid Gold */
-.review-stars { color: #F6AD55; font-size: 1.2rem; margin-bottom: 1rem; letter-spacing: -2px; }
-
-.review-testimonial-title { 
-    font-weight: 700; 
-    font-size: 1.15rem; 
-    margin-bottom: 0.8rem; 
-    color: #000000 !important; 
-}
-
-/* Detailed Text (Clean Sans-serif & Giới hạn dòng) */
-.review-detailed-text { 
-    font-size: 0.95rem; 
-    color: #4A5568; 
-    line-height: 1.65; 
-    margin-bottom: 2rem; 
-    flex-grow: 1; 
-    display: -webkit-box;
-    -webkit-line-clamp: 6; 
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-}
-
-/* CTA Link with Arrow (Luôn nằm sát đáy thẻ) */
-.review-cta {
-    margin-top: auto !important; /* Đẩy nút xuống đáy */
-    background: transparent;
-    color: var(--accent-blue) !important;
-    text-decoration: none !important;
-    font-size: 0.85rem;
-    font-weight: 700 !important;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+.reviewer-meta {
     display: flex;
     align-items: center;
-    gap: 8px;
-    transition: var(--transition-smooth, all 0.4s ease);
+    gap: 15px;
+    margin-bottom: 15px;
+    justify-content: space-between;
 }
 
-.review-cta:hover { transform: translateX(4px); color: var(--accent-blue-dark) !important; }
-.review-cta .arrow { font-size: 1.2rem; }
+.reviewer-name {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #0056A3 !important;
+}
+
+.review-date {
+    font-size: 0.85rem;
+    color: #888;
+}
+
+.review-stars {
+    color: #F6AD55;
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+}
+
+.review-testimonial-title {
+    font-weight: 700;
+    font-size: 1.15rem;
+    color: #222222 !important;
+    margin-bottom: 10px;
+}
+
+.review-detailed-text {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.6;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    flex-grow: 1;
+}
+
+.review-cta {
+    margin-top: auto;
+    color: #4CB5F9 !important;
+    font-weight: 700;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: 0.3s;
+}
+
+.review-cta:hover {
+    color: #0056A3 !important;
+}
+
+.review-cta:hover .arrow {
+    transform: translateX(5px);
+}
 
 /* =========================================================
-   RESPONSIVE (Tự động thu nhỏ trên điện thoại/Tablet)
-   ========================================================= */
-@media (max-width: 992px) {
-    .review-card-vertical {
-        flex: 0 0 280px; 
-        height: 450px;
-    }
-}
-
-@media (max-width: 768px) {
-    .review-card-vertical {
-        flex: 0 0 260px; 
-        height: 420px;
-        padding: 25px 20px !important;
-    }
-}
-
-
-/* =========================================================
-   ABOUT US SECTION (Đã loại bỏ hoàn toàn chữ màu trắng)
+   ABOUT US SECTION (KEPT FROM ORIGINAL)
    ========================================================= */
 .about-section { padding: 80px 20px; background-color: #f8f9fa; }
 .about-container { max-width: 1200px; margin: 0 auto; }
@@ -532,3 +459,35 @@ div[data-testid="stRadio"] label input:checked ~ div p {
 .ceo-author { font-weight: 800; color: #0056A3; font-size: 1.2rem; }
 .ceo-title { color: #333333; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; margin-top: 5px; font-weight: 600;}
 
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+@media (max-width: 992px) {
+    .city-grid, .feature-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .premium-search-wrapper {
+        width: 90%;
+        margin-top: -30px;
+    }
+}
+@media (max-width: 768px) {
+    .city-grid, .feature-grid {
+        grid-template-columns: 1fr;
+    }
+    .review-card-vertical {
+        flex: 0 0 280px;
+        height: 400px;
+    }
+    .section-heading {
+        font-size: 2.2rem;
+    }
+}
+@media (max-width: 576px) {
+    .city-grid {
+        grid-template-columns: 1fr;
+    }
+    .city-image-container {
+        height: 160px;
+    }
+}

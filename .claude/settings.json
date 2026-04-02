@@ -1,8 +1,8 @@
 {
   "env": {
-    "ANTHROPIC_BASE_URL": "https://openrouter.ai/api",
-    "ANTHROPIC_AUTH_TOKEN": "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",
-    "ANTHROPIC_API_KEY": "",
-    "ANTHROPIC_MODEL": "nvidia/nemotron-3-super-120b-a12b:free"
+    "ANTHROPIC_BASE_URL": "https://api.deepseek.com",
+    "ANTHROPIC_AUTH_TOKEN": "",
+    "ANTHROPIC_API_KEY": "sk-b8308570d7fc41e98c4280ccd6146779",
+    "ANTHROPIC_MODEL": "deepseek-chat"
   }
 }

@@ -1,197 +1,181 @@
 import streamlit as st
 import os
+import datetime
 from utils.helpers import get_local_img_url
-
 from components.navbar import render_navbar
+from components.search_bar import render_search_bar
 from components.hero import render_hero
 from components.footer import render_footer
 from config.languages import CONTENT
 
-# Load external CSS
-def load_all_css():
-    css_files = [
-        "assets/css/base.css",
-        "assets/css/navbar.css",
-        "assets/css/hero.css",
-        "assets/css/components.css",
-        "assets/css/footer.css"
-    ]
+# ------------------------------------------------------------------------------
+# Helper: Lấy danh sách thành phố
+# ------------------------------------------------------------------------------
+def get_all_cities(destinations_data):
+    cities = set()
+    for region in destinations_data.get('regions', {}).values():
+        for city in region.get('cities', []):
+            cities.add(city['name'])
+    return sorted(list(cities))
 
+# ------------------------------------------------------------------------------
+# MAIN APP
+# ------------------------------------------------------------------------------
+def main():
+    st.set_page_config(page_title="VNWander - Khám Phá Việt Nam", layout="wide", initial_sidebar_state="collapsed")
+    
+    # Load CSS (Giữ nguyên logic của bạn)
+    css_files = ["assets/css/base.css", "assets/css/navbar.css", "assets/css/hero.css", "assets/css/components.css", "assets/css/footer.css", "assets/css/style.css"]
     combined_css = ""
     for css_file in css_files:
         if os.path.exists(css_file):
             with open(css_file, encoding="utf-8") as f:
                 combined_css += f.read() + "\n\n"
-
     if combined_css:
-        st.markdown(f'<style>{combined_css}</style>', unsafe_allow_html=True)
+        st.markdown(f"<style>{combined_css}</style>", unsafe_allow_html=True)
 
-# Page configuration
-st.set_page_config(
-    page_title="VNWander",
-    page_icon="🌏",
-    layout="wide",
-    initial_sidebar_state="collapsed"
-)
-
-# Read query params to keep UI in sync with URL
-query_params = st.query_params
-if "lang" in query_params:
-    st.session_state.lang = query_params["lang"]
-if "region" in query_params:
-    st.session_state.selected_region = query_params["region"]
-
-# Initialize language in session state if not present
-if 'lang' not in st.session_state:
-    st.session_state.lang = 'en'
-
-# Define L correctly
-L = CONTENT[st.session_state.lang]
-
-# Load CSS
-load_all_css()
-
-# Render navbar
-render_navbar()
-
-# Render hero section
-render_hero()
-
-# ===== Favorite Destinations Section =====
-DEST = L['destinations']
-
-# Initialize selected region in session state if not present
-if 'selected_region' not in st.session_state:
-    st.session_state.selected_region = list(DEST['regions'].keys())[0]
-
-current_region = st.session_state.selected_region
-
-# 1. Render Title & Subtitle (Căn giữa, Title xanh, Subtitle đen)
-st.markdown(f"""
-<div class="dest-section" style="text-align: center; margin-top: 60px; margin-bottom: 40px; padding: 0 20px;">
-    <h1 style="color: #0056A3; font-size: 2.8rem; font-family: 'Playfair Display', serif; font-weight: 700; margin-bottom: 15px;">{DEST['title']}</h1>
-    <p style="color: #000000; font-size: 1.15rem; max-width: 800px; margin: 0 auto; line-height: 1.6;">{DEST['subtitle']}</p>
-</div>
-""", unsafe_allow_html=True)
-
-# =========================================================
-# 2. RENDER REGION TABS 
-# =========================================================
-regions_data = DEST.get('regions', {})
-options = list(regions_data.keys())
-
-# Lấy miền hiện tại từ URL (nếu có), nếu không thì mặc định là miền đầu tiên
-if "region" in st.query_params and st.query_params["region"] in options:
-    current_val = st.query_params["region"]
-else:
-    current_val = options[0] if options else ""
-
-# HÀM CALLBACK: Kích hoạt ngay chớp mắt khi người dùng vừa click chuột
-def on_region_change():
-    # Cập nhật URL ngầm ngay lập tức theo nút Radio vừa bấm
-    st.query_params["region"] = st.session_state.region_radio_widget
-
-# Tính toán vị trí đang đứng
-current_index = options.index(current_val) if current_val in options else 0
-
-# Vẽ Tabs (Radio) và gắn hàm Callback vào
-selected_region = st.radio(
-    "Chọn miền",
-    options=options,
-    format_func=lambda x: regions_data[x].get('label', x),
-    index=current_index,
-    horizontal=True,
-    label_visibility="collapsed",
-    key="region_radio_widget",  # Key độc nhất
-    on_change=on_region_change  # ĐÂY LÀ CHÌA KHÓA: Gọi hàm đồng bộ ngay khi click
-)
-
-# =========================================================
-# 3. RENDER CITY CARDS GRID (LẤY ĐÚNG MIỀN VỪA CHỌN)
-# =========================================================
-# Lấy danh sách thành phố chuẩn 100% từ biến selected_region
-cities = regions_data.get(selected_region, {}).get('cities', [])
-
-city_html = '<div class="city-grid">\n'
-
-for city_item in cities:
-    city_name = city_item['name']    
+    # Khởi tạo session state
+    if 'lang' not in st.session_state:
+        st.session_state.lang = 'vi'
+    lang = st.session_state.lang
     
-    main_img_url = city_item['img'].strip()  
+    # ── NAVBAR & HERO & SEARCH BAR ─────────────────────────────────────────────
+    render_navbar(current_page_path="/")
+    render_hero()
     
-    img_name = city_name.lower().replace(' ', '-').replace('.', '')
+    # Bao bọc Search bar trong container để CSS đẩy nó lên trên Hero
+    st.markdown('<div class="premium-search-wrapper">', unsafe_allow_html=True)
+    render_search_bar()
+    st.markdown('</div>', unsafe_allow_html=True)
+
+    # ── DỮ LIỆU TỪ NGÔN NGỮ ────────────────────────────────────────────────────
+    D = CONTENT[lang].get('destinations', {})
+    A = CONTENT[lang].get('about', {})
+    R = CONTENT[lang].get('reviews', {})
+# ==============================================================================
+    # SECTION 1: ĐIỂM ĐẾN YÊU THÍCH
+    # ==============================================================================
+    st.markdown(
+        '<div class="section-heading-container">'
+        '<span class="feature-label">KHÁM PHÁ VIỆT NAM</span>'
+        f'<h2 class="section-heading">{D.get("title", "Điểm đến yêu thích")}</h2>'
+        '</div>', 
+        unsafe_allow_html=True
+    )
+
+    regions = D.get('regions', {})
+    if regions:
+        region_keys = list(regions.keys())
+        
+        # SỬA LỖI 1: Lấy tên vùng miền từ key 'label' (ví dụ: "North Vietnam")
+        region_names = [regions[k].get('label', k) for k in region_keys]
+        
+        # Tabs chuyển vùng miền
+        selected_region_name = st.radio("Chọn vùng miền", region_names, horizontal=True, label_visibility="collapsed")
+        selected_region_key = region_keys[region_names.index(selected_region_name)]
+        cities = regions[selected_region_key].get('cities', [])
+        
+        # Build HTML Grid các thành phố
+        html_cities = '<div class="city-grid">'
+        for city in cities:
+            c_name = city.get('name', '')
+            # SỬA LỖI 2: Kéo link ảnh từ key 'img' trong JSON của bạn
+            c_img = city.get('img', 'https://images.unsplash.com/photo-1522071820081-009f0129c71c') 
+            
+            html_cities += (
+                f'<div class="city-card-premium">'
+                f'<img src="{c_img}" class="city-bg-img" alt="{c_name}" loading="lazy">'
+                f'<div class="city-overlay"></div>'
+                f'<h3 class="city-name-title">{c_name}</h3>'
+                f'</div>'
+            )
+            
+        html_cities += (
+            '</div>'
+            '<div style="text-align: center; margin-top: 40px;">'
+            f'<a href="/Destinations" target="_self" class="explore-btn">{D.get("cta_label", "Khám phá thêm")} <span class="arrow">→</span></a>'
+            '</div>'
+        )
+        st.markdown(html_cities, unsafe_allow_html=True)
+
+    # ==============================================================================
+    # SECTION 2: WHY CHOOSE US & CEO QUOTE (NIỀM TIN KHÁCH HÀNG)
+    # ==============================================================================
+    features = [
+        {"icon": "🌟", "title": "Trải Nghiệm Cao Cấp", "desc": "Mọi dịch vụ đều được tuyển chọn kỹ lưỡng, mang đến chất lượng 5 sao cho chuyến đi của bạn."},
+        {"icon": "🛡️", "title": "An Tâm Tuyệt Đối", "desc": "Hỗ trợ 24/7 trong suốt hành trình, đảm bảo an toàn và xử lý rủi ro nhanh chóng."},
+        {"icon": "💡", "title": "Thiết Kế Cá Nhân Hóa", "desc": "Lịch trình linh hoạt, thiết kế riêng theo sở thích và yêu cầu đặc biệt của bạn."},
+        {"icon": "💎", "title": "Giá Trị Đích Thực", "desc": "Không phí ẩn, cam kết mang lại giá trị trải nghiệm vượt xa chi phí bạn bỏ ra."}
+    ]
     
-    city_html += f"""
-<div class="city-card-premium">
-    <a href="/Booking" target="_self" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10;"></a>
-    <img class="city-bg-img" src="{main_img_url}" loading="lazy" decoding="async" alt="{city_name}" />
-    <div class="city-overlay"></div>
+    html_about = (
+        '<section class="feature-section">'
+        '<div class="contained-content">'
+        '<div class="feature-header">'
+        '<span class="feature-label">VÌ SAO CHỌN VNWANDER</span>'
+        '<h2 class="section-heading">Hành Trình Được Thiết Kế Bằng Đam Mê</h2>'
+        '</div>'
+        '<div class="feature-grid">'
+    )
+    for f in features:
+        html_about += (
+            f'<div class="feature-card">'
+            f'<span class="feature-icon">{f["icon"]}</span>'
+            f'<h3 class="feature-card-title">{f["title"]}</h3>'
+            f'<p class="feature-card-desc">{f["desc"]}</p>'
+            f'</div>'
+        )
+    html_about += '</div>'
     
-    <div class="city-decor-grid">
-        <div class="decor-item" style="background-image: url('https://picsum.photos/seed/{img_name}1/100/100');"></div>
-        <div class="decor-item" style="background-image: url('https://picsum.photos/seed/{img_name}2/100/100');"></div>
-        <div class="decor-item" style="background-image: url('https://picsum.photos/seed/{img_name}3/100/100');"></div>
-        <div class="decor-item" style="background-image: url('https://picsum.photos/seed/{img_name}4/100/100');"></div>
-    </div>
-    
-<h3 class="city-name-title">{city_name}</h3>
-</div>
-"""
-city_html += '</div>'
+    # CEO Quote chèn ngay dưới Why Choose Us
+    if A.get('ceo_quote'):
+        html_about += (
+            '<div style="margin-top: 80px;">'
+            '<div class="ceo-quote-box">'
+            '<div class="quote-icon">"</div>'
+            f'<p class="ceo-text">{A.get("ceo_quote", "")}</p>'
+            f'<div class="ceo-author">{A.get("ceo_name", "")}</div>'
+            f'<div class="ceo-title">{A.get("ceo_pos", "")}</div>'
+            '</div></div>'
+        )
+    html_about += '</div></section>'
+    st.markdown(html_about, unsafe_allow_html=True)
 
-# In toàn bộ Grid Thành phố ra bằng 1 lệnh duy nhất
-st.markdown(city_html, unsafe_allow_html=True)
+    # ==============================================================================
+    # SECTION 3: REVIEWS (SOCIAL PROOF AUTO SCROLL)
+    # ==============================================================================
+    items = R.get('items', [])
+    if items:
+        # Nhân đôi list để animation scroll được mượt và vô tận
+        display_items = items + items 
+        html_reviews = (
+            '<div class="reviews-section bg-light-grey">'
+            '<div class="contained-content">'
+            '<div class="feature-header">'
+            '<span class="feature-label">CÂU CHUYỆN KHÁCH HÀNG</span>'
+            f'<h2 class="section-heading">{R.get("title", "Khách Hàng Nói Gì Về Chúng Tôi")}</h2>'
+            '</div>'
+            '<div class="reviews-scroll-container">'
+            '<div class="reviews-track">'
+        )
+        for item in display_items:
+            stars = "⭐" * item.get('rating', 5)
+            html_reviews += (
+                f'<div class="review-card-vertical">'
+                f'<div class="reviewer-meta">'
+                f'<div class="reviewer-name">{item.get("name", "")}</div>'
+                f'<div class="review-date">{item.get("date", "")}</div>'
+                f'</div>'
+                f'<div class="review-stars">{stars}</div>'
+                f'<h3 class="review-testimonial-title">{item.get("testimonial", "")}</h3>'
+                f'<p class="review-detailed-text">{item.get("detailed_review", "")}</p>'
+                f'<a href="#" class="review-cta">{R.get("cta_label", "Xem chi tiết")} <span class="arrow">→</span></a>'
+                f'</div>'
+            )
+        html_reviews += '</div></div></div></div>'
+        st.markdown(html_reviews, unsafe_allow_html=True)
 
-# ===== About Us Section =====
-A = L.get('about_section', {})
-cards_html = "".join([
-    f"""<div class="why-card">
-        <div class="why-icon">{c.get('icon', '')}</div>
-        <h3 class="why-title">{c.get('title', '')}</h3>
-        <p class="why-desc">{c.get('desc', '')}</p>
-    </div>""" for c in A.get('cards', [])
-])
+    render_footer()
 
-pills_html = "".join([f'<div class="value-pill">{v}</div>' for v in A.get('values_list', [])])
-
-about_html = f"""
-<div class="about-section">
-    <div class="about-container">
-        <h2 class="section-heading">{A.get('why_title', '')}</h2>
-        <p style="text-align: center; max-width: 800px; margin: -20px auto 50px auto; color: #111; line-height: 1.7; font-size: 1.1rem;">
-            {A.get('why_subtitle', '')}
-        </p>
-        <div class="why-grid">{cards_html}</div>
-        <div class="values-container">
-            <h2 class="section-heading" style="margin-bottom: 40px;">{A.get('values_title', '')}</h2>
-            <div class="values-wrapper">{pills_html}</div>
-        </div>
-        <div class="ceo-quote-box">
-            <div class="quote-icon">"</div>
-            <p class="ceo-text">{A.get('ceo_quote', '')}</p>
-            <div class="ceo-author">{A.get('ceo_name', '')}</div>
-            <div class="ceo-title">{A.get('ceo_pos', '')}</div>
-        </div>
-    </div>
-</div>
-"""
-st.markdown(about_html, unsafe_allow_html=True)
-
-# ===== Reviews section =====
-reviews = CONTENT[st.session_state.lang]['reviews']
-items = reviews['items']
-display_items = items + items 
-
-# 1. Nén toàn bộ các thẻ con (Cards) thành 1 dòng dài duy nhất bằng hàm join()
-cards_html = "".join([
-    f"""<div class="review-card-vertical"><div class="reviewer-meta"><div class="reviewer-name">{item['name']}</div><div class="review-date">{item['date']}</div></div><div class="review-stars">{"⭐" * item['rating']}</div><h3 class="review-testimonial-title">{item['testimonial']}</h3><p class="review-detailed-text">{item['detailed_review']}</p><a href="#" class="review-cta">{reviews['cta_label']} <span class="arrow">→</span></a></div>"""
-    for item in display_items
-])
-
-# 2. Nén toàn bộ khung cha bên ngoài thành 1 dòng và nhét thẻ con vào giữa
-reviews_html = f"""<div class="reviews-section bg-light-grey"><div class="contained-content"><div class="reviews-header"><div class="section-label">{reviews['label']}</div><h2 class="section-title">{reviews['title']}</h2></div><div class="reviews-scroll-container"><div class="reviews-track">{cards_html}</div></div></div></div>"""
-
-# 3. In ra màn hình (Lúc này HTML là 1 khối đặc nguyên khối, Streamlit không thể phá)
-st.markdown(reviews_html, unsafe_allow_html=True)
-
-render_footer()
+if __name__ == "__main__":
+    main()

@@ -1,387 +1,1263 @@
-/* Font chữ và Reset */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@400;500;600&display=swap');
+/* ===== TỔNG THỂ ===== */
+:root {
+    --primary-blue: #0056A3;
+    --secondary-blue: #4CB5F9;
+    --dark-blue: #004080;
+    --light-blue: #e6f3ff;
+    --white: #ffffff;
+    --gray-light: #f8f9fa;
+    --gray: #6c757d;
+    --black: #212529;
+}
 
 body {
+    background-color: var(--white);
+    color: var(--black);
     font-family: 'Inter', sans-serif;
 }
 
-/* Navbar Styling */
+/* ===== NAVBAR ===== */
 .navbar-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 5%;
-    background: white;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    background: var(--white);
+    box-shadow: 0 2px 15px rgba(0,86,163,0.1);
+}
+.navbar-container .navbar-brand {
+    color: var(--primary-blue);
+    font-weight: 800;
+}
+.navbar-container .nav-link {
+    color: var(--black);
+    transition: color 0.3s;
+}
+.navbar-container .nav-link:hover,
+.navbar-container .nav-link.active {
+    color: var(--primary-blue);
 }
 
-/* Team Grid Layout */
-.team-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
-    padding: 40px 0;
+/* ===== HERO ===== */
+.hero-section {
+    background: linear-gradient(135deg, var(--light-blue) 0%, var(--white) 100%);
+    padding: 120px 0 80px;
 }
-
-.team-card {
-    background: white;
-    padding: 20px;
-    border-radius: 15px;
-    text-align: center;
-    transition: transform 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+.hero-title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 800;
+    font-size: 3.5rem;
 }
-
-.team-card:hover {
-    transform: translateY(-10px);
+.hero-title .blue-text {
+    color: var(--primary-blue);
 }
-
-.member-img {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 15px;
-    border: 3px solid #0056A3;
-}
-
-.member-name {
-    font-weight: 700;
+.hero-subtitle {
     font-size: 1.2rem;
-    color: #1a202c;
+    color: var(--gray);
+    margin: 20px 0;
 }
-
-.member-role {
-    color: #0056A3;
+.btn-primary-custom {
+    background-color: var(--primary-blue);
+    border: none;
+    padding: 12px 30px;
+    border-radius: 50px;
     font-weight: 600;
-    margin-bottom: 10px;
-    font-size: 0.9rem;
+    transition: background 0.3s;
+}
+.btn-primary-custom:hover {
+    background-color: var(--dark-blue);
 }
 
-.member-bio {
-    color: #718096;
-    font-size: 0.85rem;
-    line-height: 1.5;
+/* ===== DESTINATIONS ===== */
+.destinations-section {
+    padding: 80px 0;
 }
-
-/* =========================================================
-   TEAM PAGE STYLES
-   ========================================================= */
-.team-grid {
+.destinations-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    color: var(--primary-blue);
+    text-align: center;
+    margin-bottom: 15px;
+}
+.destinations-subtitle {
+    text-align: center;
+    color: var(--gray);
+    max-width: 700px;
+    margin: 0 auto 50px;
+}
+.region-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+}
+.region-tab {
+    padding: 10px 25px;
+    background: var(--light-blue);
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+.region-tab.active,
+.region-tab:hover {
+    background: var(--primary-blue);
+    color: var(--white);
+}
+.city-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
-    padding: 40px 0;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
 }
-
-.team-card {
-    background: white;
+.city-card {
+    background: var(--white);
     border-radius: 20px;
     overflow: hidden;
-    text-align: center;
-    padding: 30px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-    transition: all 0.3s ease;
-    border: 1px solid #f0f0f0;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s, box-shadow 0.3s;
 }
-
-.team-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+.city-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,86,163,0.15);
 }
-
-.member-img {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
+.city-card img {
+    width: 100%;
+    height: 200px;
     object-fit: cover;
-    margin-bottom: 20px;
-    border: 4px solid #f0f7ff;
 }
-
-.member-name {
-    font-size: 1.25rem;
+.city-card .city-name {
+    padding: 15px;
     font-weight: 700;
-    color: #1a202c;
-    margin-bottom: 5px;
+    color: var(--primary-blue);
+    text-align: center;
 }
 
-.member-role {
-    color: #0056A3;
+/* ===== ABOUT SECTION ===== */
+.about-section {
+    background: var(--light-blue);
+    padding: 80px 0;
+}
+.about-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    color: var(--primary-blue);
+    margin-bottom: 20px;
+}
+.about-text {
+    color: var(--black);
+    line-height: 1.8;
+}
+.about-card {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    height: 100%;
+}
+.about-icon {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+.about-card h4 {
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: var(--primary-blue);
+}
+
+/* ===== BOOKING ===== */
+.booking-wrapper {
+    padding: 80px 0;
+    background: var(--white);
+}
+.booking-box {
+    max-width: 1000px;
+    margin: 0 auto;
+    background: var(--white);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+    border: 1px solid #eef2f6;
+}
+.booking-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    color: var(--primary-blue);
+    margin-bottom: 30px;
+    text-align: center;
+}
+.trip-type-options {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 25px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+}
+.trip-type-options label {
     font-weight: 600;
+    color: var(--black);
+    cursor: pointer;
+}
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.form-group label {
+    font-weight: 600;
+    color: var(--gray);
     font-size: 0.9rem;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
+}
+.form-group input,
+.form-group select {
+    padding: 14px 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 1rem;
+    background: var(--white);
+    transition: border 0.3s;
+}
+.form-group input:focus,
+.form-group select:focus {
+    border-color: var(--primary-blue);
+    outline: none;
+}
+.search-btn-wrapper {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 15px;
+}
+.search-btn {
+    background: var(--primary-blue);
+    color: white;
+    padding: 14px 35px;
+    border: none;
+    border-radius: 50px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+.search-btn:hover {
+    background: var(--dark-blue);
+}
+
+/* ===== REVIEWS ===== */
+.reviews-section {
+    background: var(--light-blue);
+    padding: 80px 0;
+}
+.reviews-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    color: var(--primary-blue);
+    text-align: center;
+    margin-bottom: 10px;
+}
+.reviews-label {
+    text-align: center;
+    letter-spacing: 2px;
+    color: var(--secondary-blue);
+    margin-bottom: 20px;
+}
+.review-card {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 25px;
+    margin: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+.review-card .rating {
+    color: #ffc107;
+    margin-bottom: 10px;
+}
+.review-card .testimonial {
+    font-style: italic;
+    font-weight: 500;
     margin-bottom: 15px;
 }
-
-.member-bio {
+.review-card .detail {
     font-size: 0.9rem;
-    color: #718096;
-    line-height: 1.5;
+    color: var(--gray);
+}
+.review-card .name {
+    font-weight: 700;
+    color: var(--primary-blue);
+    margin-top: 15px;
+}
+.review-card .date {
+    font-size: 0.8rem;
+    color: #aaa;
 }
 
-/* =========================================================
-   CAREERS PAGE
-   ========================================================= */
-.values-title-blue {
-    font-family: 'Playfair Display', serif !important;
-    font-size: 3.8rem !important;
-    color: #4CB5F9 !important; 
-    font-weight: 800;
+/* ===== FOOTER ===== */
+.footer {
+    background: #f8fafc;
+    padding: 60px 0 30px;
+    border-top: 1px solid #e9ecef;
+}
+.footer h5 {
+    font-weight: 700;
+    color: var(--primary-blue);
+    margin-bottom: 20px;
+}
+.footer a {
+    color: var(--gray);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+.footer a:hover {
+    color: var(--primary-blue);
+}
+.copyright {
     text-align: center;
-    margin-bottom: 60px;
-    width: 100%;
+    padding-top: 30px;
+    margin-top: 30px;
+    border-top: 1px solid #e9ecef;
+    font-size: 0.9rem;
+    color: var(--gray);
 }
 
-/* 2. KHUNG CHỨA - CỐ ĐỊNH CHIỀU CAO ĐỂ KHÔNG BỊ GIẬT */
-.focus-slider-wrapper {
-    position: relative;
-    max-width: 1300px;
+/* ===================================================
+   TEAM PAGE
+   =================================================== */
+
+/* ---------- Shared page wrapper ---------- */
+/* Centers content to ~55-60% of wide layout screen */
+.team-page-wrap {
+    max-width: 960px;
     margin: 0 auto;
-    height: 350px; /* Khóa chiều cao cố định */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: visible; /* Cho phép các card scale to ra không bị mất hình */
+    padding: 0 32px;
 }
 
-.focus-slider-container {
+/* ---------- Section labels (eyebrow text) ---------- */
+.team-eyebrow {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #C9A84C;                    /* warm gold accent */
+    margin-bottom: 14px;
+}
+
+/* ===== 1. HERO / HOOK ===== */
+.team-hero {
+    position: relative;
+    min-height: 520px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 25px;
+    text-align: center;
+    background: linear-gradient(160deg, #071E35 0%, #0B3D6B 60%, #0056A3 100%);
+    color: white;
+    overflow: hidden;
+    padding: 80px 20px;
+}
+/* Subtle diagonal grid texture overlay */
+.team-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+}
+/* Photo background */
+.team-hero-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=2000&q=80');
+    background-size: cover;
+    background-position: center 30%;
+    opacity: 0.12;
+    pointer-events: none;
+}
+/* Warm gold top-left glow */
+.team-hero::after {
+    content: '';
+    position: absolute;
+    top: -80px;
+    left: -80px;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(201,168,76,0.18) 0%, transparent 70%);
+    pointer-events: none;
+}
+.team-hero-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 720px;
+}
+.team-hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.4rem;
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: 24px;
+    /* gold shimmer on key word via span */
+}
+.team-hero-title .gold {
+    color: #C9A84C;
+}
+.team-hero-subtitle {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    opacity: 0.85;
+    max-width: 600px;
+    margin: 0 auto;
+}
+/* Decorative bottom divider */
+.team-hero-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 44px;
+}
+.team-hero-divider span {
+    display: block;
+    width: 60px;
+    height: 1px;
+    background: rgba(201,168,76,0.5);
+}
+.team-hero-divider i {
+    color: #C9A84C;
+    font-size: 1.1rem;
+}
+
+/* ===== 2. LEADERSHIP ===== */
+.team-leadership {
+    padding: 96px 0 80px;
+    background: #fff;
+}
+.team-leadership-grid {
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    gap: 64px;
+    align-items: center;
+}
+.team-leader-photo-wrap {
+    position: relative;
+}
+.team-leader-photo-wrap::before {
+    /* decorative offset border */
+    content: '';
+    position: absolute;
+    top: 18px;
+    left: 18px;
+    right: -18px;
+    bottom: -18px;
+    border: 2px solid #C9A84C;
+    border-radius: 28px;
+    opacity: 0.4;
+}
+.team-leader-photo-wrap img {
     width: 100%;
-    will-change: transform; /* Báo trước cho trình duyệt để tối ưu */
+    border-radius: 24px;
+    object-fit: cover;
+    aspect-ratio: 3/4;
+    display: block;
+    position: relative;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.14);
+    transition: transform 0.4s ease;
+}
+.team-leader-photo-wrap img:hover {
+    transform: scale(1.015) translateY(-4px);
+}
+.team-leader-content {
+    padding-left: 8px;
+}
+.team-leader-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: #071E35;
+    margin: 10px 0 4px;
+    line-height: 1.15;
+}
+.team-leader-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #0056A3;
+    margin-bottom: 32px;
+}
+.team-leader-quote {
+    position: relative;
+    background: linear-gradient(135deg, #f5f9ff 0%, #eef4fb 100%);
+    border-left: 3px solid #C9A84C;
+    border-radius: 0 20px 20px 0;
+    padding: 28px 32px;
+}
+.team-leader-quote-mark {
+    font-family: 'Playfair Display', serif;
+    font-size: 5rem;
+    line-height: 0.6;
+    color: #C9A84C;
+    opacity: 0.4;
+    display: block;
+    margin-bottom: 12px;
+}
+.team-leader-quote p {
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: #2c3e50;
+    font-style: italic;
+    margin: 0;
 }
 
-/* 3. THIẾT KẾ CARD - CHỐNG NHÁY (ANTI-FLICKER) */
-.value-card-focus {
-    width: 400px;  
-    height: 260px; 
+/* ===== 3. CORE TEAMS ===== */
+.team-core {
+    padding: 96px 0;
+    background: #F7FAFD;
+}
+.team-core-header {
+    text-align: center;
+    margin-bottom: 72px;
+}
+.team-core-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: #071E35;
+    margin: 12px 0 18px;
+}
+.team-core-header p {
+    font-size: 1rem;
+    color: #6c757d;
+    max-width: 520px;
+    margin: 0 auto;
+    line-height: 1.7;
+}
+
+.core-teams-section {
+    padding: 80px 0;
+    background-color: #f7fafd; 
+    width: 100%;
+}
+
+.core-teams-container {
+    max-width: 1000px !important; 
+    margin: 0 auto !important;    
+    padding: 0 20px;
+}
+
+.member-info {
+    margin-bottom: 15px;
+    flex-grow: 1; 
+}
+
+/* Group block */
+.team-group {
+    margin-bottom: 80px;
+}
+.team-group:last-child {
+    margin-bottom: 0;
+}
+.team-group-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 12px;
+}
+.team-group-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #0056A3, #4CB5F9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+.team-group-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #071E35;
+    margin: 0;
+}
+.team-group-desc {
+    font-size: 0.95rem;
+    color: #6c757d;
+    margin: 0 0 36px 60px;   /* indent to align under group name */
+    line-height: 1.6;
+}
+
+/* THE KEY FIX: CSS Grid, 2 explicit columns, no wrapping possible */
+.team-members-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);  /* always 2 columns on desktop */
+    gap: 28px;
+}
+
+/* Member card */
+.member-card {
+    background: #ffffff;
     border-radius: 20px;
     overflow: hidden;
-    position: relative;
-    border: 1px solid #eee;
-    background-color: #f0f0f0; /* Nền xám nhẹ để khi chưa có ảnh không bị trắng xóa */
-    
-    /* Chìa khóa mượt mà: Hardware Acceleration */
-    backface-visibility: hidden;
-    transform-style: preserve-3d;
-    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1), 
-                filter 0.6s ease, 
-                box-shadow 0.6s ease;
-}
-
-.side-card {
-    filter: brightness(35%) blur(1px); /* Thêm tí blur cho chuyên nghiệp */
-    transform: scale(0.88) translateZ(0);
-    z-index: 1;
-}
-
-.center-card {
-    filter: brightness(100%) blur(0px);
-    transform: scale(1.05) translateZ(0);
-    z-index: 10;
-    box-shadow: 0 20px 40px rgba(76, 181, 249, 0.25);
-    border: 3px solid #4CB5F9 !important;
-}
-
-.value-card-focus img {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover;
-    display: block;
-}
-
-.value-info-focus {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 15px;
-    background: linear-gradient(transparent, rgba(0,0,0,0.85));
-    color: white;
-    text-align: center;
-    pointer-events: none; /* Không để text làm cản trở click */
-}
-
-/* =========================================================
-   NEWS PAGE REDESIGN
-   ========================================================= */
-/* ÉP KHUNG CHÍNH CỦA STREAMLIT */
-[data-testid="stAppViewBlockContainer"] {
-    max-width: 100% !important; /* Cho phép căn giữa trên toàn màn hình */
-    padding-top: 5rem !important;
-}
-
-/* THIẾT KẾ THẺ BÀI BÁO (CARD) */
-.vn-news-card-50 {
-    width: 50% !important;     
-    margin: 0 auto 100px auto !important;
-    border: 1px solid #e0e0e0 !important;
-    border-radius: 24px !important;     
-    overflow: hidden !important;         
-    background-color: #ffffff !important;
-    display: flex !important;
-    flex-direction: column !important;   
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.vn-news-card-50:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
-}
-
-/* Ảnh nằm trên cùng của Card */
-.vn-news-card-50 img {
-    width: 100% !important;
-    height: 350px !important; /* Chiều cao ảnh vừa vặn với chiều rộng 50% */
-    object-fit: cover !important;
-    border-bottom: 1px solid #f0f0f0;
-}
-
-/* Nội dung bên dưới ảnh */
-.vn-news-info-box {
-    padding: 35px !important; /* Tạo khoảng trống bên trong viền */
-    text-align: left;
-}
-
-.vn-news-title-modern {
-    font-family: 'Playfair Display', serif;
-    font-size: 2rem !important;
-    color: #111 !important;
-    line-height: 1.3 !important;
-    margin-bottom: 15px !important;
-    font-weight: 700 !important;
-}
-
-.vn-news-summary-modern {
-    font-size: 1.05rem !important;
-    color: #555 !important;
-    line-height: 1.7 !important;
-    margin-bottom: 25px !important;
-}
-
-.vn-news-footer-modern {
+    box-shadow: 0 4px 20px rgba(0,30,70,0.07);
+    transition: transform 0.32s ease, box-shadow 0.32s ease;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-top: 20px;
-    border-top: 1px solid #f5f5f5;
-    font-size: 0.85rem;
-    color: #999;
+    flex-direction: row;       /* photo left, info right within card */
+    min-height: 180px;
+    /* NO fixed width — grid controls width. NO height — content dictates. */
 }
-
-/* assets/css/components.css */
-
-/* =========================================================
-   CAREERS - DARK LANDSCAPE SCROLL (3 CARDS FOCUS)
-   ========================================================= */
-
-/* KHUNG NỀN ĐEN */
-.values-dark-section {
-    background-color: #000000 !important;
-    padding: 100px 0;
-    margin-top: 80px;
-    width: 100%;
+.member-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 40px rgba(0,86,163,0.13);
 }
-
-/* TIÊU ĐỀ XANH NỔI BẬT */
-.values-title-center {
-    font-family: 'Playfair Display', serif !important;
-    font-size: 3.5rem !important;
-    color: #4CB5F9 !important;
-    text-align: center;
-    margin-bottom: 60px !important;
-    font-weight: 800;
-}
-
-/* CONTAINER CUỘN NGANG */
-.values-drag-container {
-    display: flex;
-    gap: 30px; /* Khoảng cách giữa các ảnh */
-    overflow-x: auto; /* Cho phép cuộn/kéo ngang */
-    padding: 20px 50px 50px 50px;
-    scroll-snap-type: x mandatory; /* Hiệu ứng hít ảnh */
-    cursor: grab;
-    -webkit-overflow-scrolling: touch;
-}
-
-.values-drag-container:active {
-    cursor: grabbing;
-}
-
-/* ẨN THANH CUỘN (SCROLLBAR) */
-.values-drag-container::-webkit-scrollbar {
-    display: none;
-}
-.values-drag-container {
-    -ms-overflow-style: none;  
-    scrollbar-width: none;  
-}
-
-/* CARD NẰM NGANG - TỈ LỆ 3 ẢNH/MÀN HÌNH */
-.value-card-landscape {
-    /* Ép đúng 1/3 chiều rộng màn hình trừ đi khoảng cách gap */
-    flex: 0 0 calc(33.33% - 20px); 
-    height: 300px; /* Chiều cao thấp hơn chiều rộng để tạo dáng ngang */
-    background: #111;
-    border-radius: 16px;
+.member-photo {
+    width: 150px;              /* fixed photo column inside card */
+    min-width: 150px;          /* immune to flex compression */
+    flex-shrink: 0;
     overflow: hidden;
-    position: relative;
-    scroll-snap-align: center; /* Hít vào giữa khi dừng kéo */
-    border: 1px solid #222;
-    transition: all 0.4s ease;
 }
-
-.value-card-landscape:hover {
-    border-color: #4CB5F9;
-    transform: translateY(-5px);
-}
-
-.value-card-landscape img {
+.member-photo img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    filter: brightness(0.5); /* Mặc định tối hơn */
-    transition: 0.5s ease;
+    object-position: top center;
+    transition: transform 0.4s ease;
+    display: block;
+}
+.member-card:hover .member-photo img {
+    transform: scale(1.06);
+}
+.member-body {
+    padding: 22px 22px 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
+    min-width: 0;              /* prevents text overflow breaking grid */
+}
+.member-name {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #071E35;
+    margin: 0 0 4px;
+    line-height: 1.2;
+}
+.member-role {
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #0056A3;
+    margin: 0 0 14px;
+}
+.member-fun-fact {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: #EEF7FF;
+    color: #0056A3;
+    font-size: 0.78rem;
+    font-weight: 500;
+    padding: 6px 12px;
+    border-radius: 30px;
+    border: 1px solid #cce3f7;
+    align-self: flex-start;
+    line-height: 1.3;
+}
+.member-fun-fact::before {
+    content: '✦';
+    font-size: 0.6rem;
+    color: #C9A84C;
+    flex-shrink: 0;
 }
 
-.value-card-landscape:hover img {
-    filter: brightness(0.8); /* Sáng hơn khi hover */
+/* ===== 4. CULTURE ===== */
+.team-culture {
+    padding: 96px 0;
+    background: #ffffff;
 }
-
-.value-card-info {
+.team-culture-header {
+    text-align: center;
+    margin-bottom: 56px;
+}
+.team-culture-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #071E35;
+    margin: 12px 0 18px;
+}
+.team-culture-header p {
+    font-size: 1rem;
+    color: #6c757d;
+    max-width: 520px;
+    margin: 0 auto;
+    line-height: 1.7;
+}
+/* 3-col photo mosaic — large left + 2 stacked right */
+.team-culture-gallery {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 20px;
+}
+.culture-photo {
+    border-radius: 18px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.09);
+    transition: transform 0.3s ease;
+}
+.culture-photo:hover {
+    transform: scale(1.015);
+}
+.culture-photo.large {
+    grid-row: 1 / 3;           /* spans both rows */
+}
+.culture-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    min-height: 200px;
+}
+.culture-photo.large img {
+    min-height: 400px;
+}
+/* Caption overlay */
+.culture-photo-caption {
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
-    padding: 25px;
-    background: linear-gradient(transparent, rgba(0,0,0,0.9));
+    padding: 18px 20px 16px;
+    background: linear-gradient(transparent, rgba(7,30,53,0.75));
+    color: white;
+    font-size: 0.82rem;
+    font-weight: 500;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+.culture-photo:hover .culture-photo-caption {
+    opacity: 1;
+}
+/* Culture values row */
+.team-culture-values {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 48px;
+}
+.culture-value {
+    text-align: center;
+    padding: 28px 20px;
+    background: #F7FAFD;
+    border-radius: 16px;
+    border-top: 3px solid #C9A84C;
+}
+.culture-value-icon {
+    font-size: 2rem;
+    margin-bottom: 12px;
+}
+.culture-value h4 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #071E35;
+    margin: 0 0 8px;
+}
+.culture-value p {
+    font-size: 0.82rem;
+    color: #6c757d;
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* ===== 5. CTA ===== */
+.team-cta {
+    padding: 96px 0;
+    background: linear-gradient(150deg, #071E35 0%, #0056A3 100%);
+    position: relative;
+    overflow: hidden;
     color: white;
     text-align: center;
 }
+/* Subtle radial glow */
+.team-cta::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    right: -100px;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(201,168,76,0.15) 0%, transparent 65%);
+    pointer-events: none;
+}
+.team-cta-inner {
+    position: relative;
+    z-index: 2;
+}
+.team-cta h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.4rem;
+    font-weight: 700;
+    margin: 12px 0 16px;
+}
+.team-cta p {
+    font-size: 1.05rem;
+    opacity: 0.8;
+    max-width: 480px;
+    margin: 0 auto 48px;
+    line-height: 1.7;
+}
+.team-cta-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.team-cta-btn {
+    display: inline-block;
+    padding: 16px 40px;
+    border-radius: 50px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+.team-cta-btn.primary {
+    background: #C9A84C;
+    color: #071E35;
+    border: 2px solid #C9A84C;
+}
+.team-cta-btn.primary:hover {
+    background: #e0be6a;
+    border-color: #e0be6a;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 28px rgba(201,168,76,0.35);
+}
+.team-cta-btn.secondary {
+    background: transparent;
+    color: white;
+    border: 2px solid rgba(255,255,255,0.5);
+}
+.team-cta-btn.secondary:hover {
+    background: rgba(255,255,255,0.12);
+    border-color: white;
+    transform: translateY(-3px);
+}
 
-.value-card-info h4 {
-    font-size: 1.5rem;
-    color: #4CB5F9;
-    margin: 0 0 5px 0;
+/* ===== Shared section divider ===== */
+.team-section-divider {
+    width: 48px;
+    height: 3px;
+    background: linear-gradient(90deg, #C9A84C, #4CB5F9);
+    border-radius: 2px;
+    margin: 16px auto 0;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+    .team-leadership-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    .team-leader-photo-wrap::before {
+        display: none;
+    }
+    .team-leader-photo-wrap img {
+        max-width: 280px;
+        margin: 0 auto;
+        display: block;
+        aspect-ratio: 1/1;
+    }
+    .team-members-grid {
+        grid-template-columns: 1fr;   /* single col on mobile */
+    }
+    .team-hero-title {
+        font-size: 2.4rem;
+    }
+    .team-culture-gallery {
+        grid-template-columns: 1fr;
+    }
+    .culture-photo.large {
+        grid-row: auto;
+    }
+    .team-culture-values {
+        grid-template-columns: 1fr;
+    }
+    .team-group-desc {
+        margin-left: 0;
+    }
+    .team-cta h2 {
+        font-size: 1.9rem;
+    }
+}
+@media (max-width: 600px) {
+    .team-page-wrap {
+        padding: 0 18px;
+    }
+    .team-hero-title {
+        font-size: 1.9rem;
+    }
+    .member-card {
+        flex-direction: column;
+    }
+    .member-photo {
+        width: 100%;
+        min-width: unset;
+        height: 180px;
+    }
+    .team-cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
 }
 
 /* =========================================================
-   BOOKING PAGE SECTION
+   CAREERS PAGE (REDESIGN CAO CẤP)
    ========================================================= */
-.booking-wrapper { padding: 100px 20px 60px 20px; background-color: #f4f7f6; min-height: 80vh; }
-.booking-box { max-width: 1000px; margin: 0 auto; background: white; padding: 40px; border-radius: 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.08); }
-.booking-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: #0056A3; margin-bottom: 30px; font-weight: 700; text-align: center; }
-.trip-type-options { display: flex; gap: 30px; margin-bottom: 25px; border-bottom: 1px solid #eee; padding-bottom: 15px; }
-.trip-type-options label { font-weight: 600; color: #333; cursor: pointer; display: flex; align-items: center; gap: 8px; }
-.form-grid { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 20px; }
-.form-group { display: flex; flex-direction: column; gap: 8px; }
-.form-group label { font-weight: 600; color: #555; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.5px; }
-.form-group input, .form-group select { padding: 14px 15px; border: 1px solid #ddd; border-radius: 10px; font-size: 1rem; color: #111; background: #fafafa; transition: border 0.3s; width: 100%; }
-.form-group input:focus, .form-group select:focus { border-color: #4CB5F9; outline: none; background: #fff; }
-.search-btn-wrapper { grid-column: 1 / -1; display: flex; justify-content: flex-end; margin-top: 15px; }
-.search-btn { background: #0056A3; color: white; padding: 16px 40px; border: none; border-radius: 50px; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: background 0.3s; }
-.search-btn:hover { background: #004080; }
+
+/* --- TỶ LỆ VÀNG CHUNG --- */
+.careers-wrapper {
+    background-color: #ffffff;
+    overflow: hidden;
+}
+.cr-container {
+    max-width: 1050px !important; /* Chuẩn 60-65% width trên màn lớn */
+    margin: 0 auto !important;
+    padding: 0 20px;
+}
+.cr-eyebrow {
+    display: inline-block;
+    color: #4CB5F9;
+    font-size: 0.85rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+/* CHỮ TO: MÀU XANH THƯƠNG HIỆU */
+.cr-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    color: #0056A3 !important; 
+    font-weight: 800;
+    margin: 0 0 20px 0;
+}
+.cr-section-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+.cr-divider {
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, #4CB5F9, #0056A3);
+    margin: 20px auto 0;
+    border-radius: 2px;
+}
+
+/* --- SECTION 1: HERO & CULTURE --- */
+.cr-hero-section {
+    padding: 80px 0 100px;
+    background: linear-gradient(135deg, #f0f7ff 0%, #ffffff 100%);
+}
+.cr-hero-flex {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+}
+.cr-hero-text { flex: 1; }
+
+/* CHỮ NHỎ: MÀU ĐEN RÕ NÉT */
+.cr-desc {
+    font-size: 1.1rem;
+    color: #222222 !important; 
+    line-height: 1.8;
+    margin-bottom: 40px;
+}
+
+.cr-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #0056A3;
+    color: #ffffff !important; /* Chữ trong button màu trắng */
+    padding: 15px 35px;
+    border-radius: 50px;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 10px 20px rgba(0, 86, 163, 0.2);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+.cr-btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(0, 86, 163, 0.3);
+    background: #004080;
+}
+.cr-btn-primary .arrow { transition: transform 0.3s; }
+.cr-btn-primary:hover .arrow { transform: translateX(5px); }
+
+/* Animation cho ảnh Hero */
+.cr-hero-image {
+    flex: 1;
+    position: relative;
+    animation: float 6s ease-in-out infinite;
+}
+.cr-hero-image img {
+    width: 100%;
+    border-radius: 30px;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+    position: relative;
+    z-index: 2;
+}
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0px); }
+}
+
+/* --- SECTION 2: PERKS & BENEFITS --- */
+.cr-perks-section { padding: 100px 0; background: #ffffff; }
+.cr-perks-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+}
+.cr-perk-card {
+    background: #fdfdfd;
+    padding: 40px;
+    border-radius: 24px;
+    border: 1px solid #f0f0f0;
+    transition: all 0.4s ease;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+}
+.cr-perk-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 86, 163, 0.08);
+    border-color: #dbeafe;
+}
+.cr-perk-icon-wrap {
+    width: 70px; height: 70px;
+    background: #eef6ff;
+    border-radius: 20px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 25px;
+    transition: transform 0.3s;
+}
+.cr-perk-card:hover .cr-perk-icon-wrap { transform: rotate(10deg) scale(1.1); }
+.cr-perk-icon { font-size: 2rem; }
+
+/* CHỮ TO: XANH | CHỮ NHỎ: ĐEN */
+.cr-perk-title { color: #0056A3 !important; font-size: 1.4rem; font-weight: 700; margin-bottom: 15px; }
+.cr-perk-desc { color: #222222 !important; line-height: 1.6; }
+
+/* --- SECTION 3: LEARNING & DEVELOPMENT --- */
+.cr-learning-section { padding: 100px 0; background: #f7fafd; }
+.cr-roadmap-container {
+    display: flex; flex-direction: column; gap: 25px;
+}
+.cr-roadmap-step {
+    display: flex; align-items: stretch;
+    background: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+    transition: transform 0.3s;
+}
+.cr-roadmap-step:hover { transform: translateX(10px); }
+.cr-step-number {
+    background: #0056A3;
+    color: #fff;
+    font-size: 2.5rem;
+    font-weight: 900;
+    padding: 30px 40px;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0.9;
+}
+.cr-step-content {
+    padding: 30px;
+    display: flex; align-items: center; gap: 20px;
+}
+.cr-step-icon { font-size: 2.5rem; background: #f0f7ff; padding: 15px; border-radius: 50%; }
+
+/* CHỮ TO: XANH | CHỮ NHỎ: ĐEN */
+.cr-step-title { color: #0056A3 !important; font-size: 1.4rem; font-weight: 700; margin: 0 0 10px 0; }
+.cr-step-desc { color: #222222 !important; margin: 0; line-height: 1.6; }
+
+/* --- SECTION 4: OPEN POSITIONS --- */
+.cr-jobs-section { padding: 100px 0 150px; background: #ffffff; }
+.cr-dept-group { margin-bottom: 40px; }
+.cr-dept-name {
+    font-size: 1.5rem;
+    color: #0056A3 !important; /* Chữ to xanh */
+    border-bottom: 2px solid #eef2f6;
+    padding-bottom: 15px;
+    margin-bottom: 25px;
+}
+.cr-job-item {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 25px 30px;
+    background: #fdfdfd;
+    border: 1px solid #eee;
+    border-radius: 16px;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+}
+.cr-job-item:hover {
+    background: #ffffff;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.05);
+    border-color: #4CB5F9;
+    transform: scale(1.01);
+}
+
+/* CHỮ TO: XANH | CHỮ NHỎ: ĐEN */
+.cr-job-title { font-size: 1.2rem; font-weight: 700; color: #0056A3 !important; margin: 0 0 8px 0; }
+.cr-job-location { font-size: 0.95rem; color: #333333 !important; font-weight: 500; }
+
+.cr-btn-apply {
+    background: #f0f7ff;
+    color: #0056A3 !important;
+    padding: 12px 25px;
+    border-radius: 50px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: 0.3s;
+    border: 1px solid #dbeafe;
+}
+.cr-job-item:hover .cr-btn-apply {
+    background: #0056A3;
+    color: #ffffff !important; /* Chữ button trắng khi hover */
+}
+.cr-btn-apply .arrow { transition: transform 0.3s; display: inline-block; margin-left: 5px; }
+.cr-job-item:hover .arrow { transform: translateX(4px); }
+
+/* --- RESPONSIVE MOBILE --- */
+@media (max-width: 900px) {
+    .cr-hero-flex { flex-direction: column; text-align: center; }
+    .cr-perks-grid { grid-template-columns: 1fr; }
+    .cr-roadmap-step { flex-direction: column; }
+    .cr-step-number { padding: 15px; font-size: 1.5rem; }
+    .cr-job-item { flex-direction: column; align-items: flex-start; gap: 20px; }
+}
+
+/* ===== NEWS PAGE ===== */
+.news-header {
+    padding: 100px 0 60px;
+    text-align: center;
+    background: linear-gradient(135deg, var(--light-blue), var(--white));
+}
+.news-header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    color: var(--primary-blue);
+}
+.vn-news-card-50 {
+    width: 70%;
+    margin: 0 auto 80px auto;
+    background: var(--white);
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    transition: transform 0.3s;
+}
+.vn-news-card-50:hover {
+    transform: translateY(-5px);
+}
+.vn-news-card-50 img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+}
+.vn-news-info-box {
+    padding: 35px;
+}
+.vn-news-title-modern {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    color: var(--primary-blue);
+    margin-bottom: 15px;
+}
+.vn-news-summary-modern {
+    color: var(--gray);
+    line-height: 1.7;
+}
+.vn-news-footer-modern {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #f0f0f0;
+    font-size: 0.85rem;
+    color: #aaa;
+}
+.read-more {
+    color: var(--primary-blue);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+/* ===== CONTACT PAGE ===== */
+.contact-header {
+    padding: 100px 0 60px;
+    text-align: center;
+    background: linear-gradient(135deg, var(--light-blue), var(--white));
+}
+.contact-header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    color: var(--primary-blue);
+}
+.contact-form {
+    max-width: 800px;
+    margin: 60px auto;
+    background: var(--white);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+.form-group-contact {
+    margin-bottom: 20px;
+}
+.form-group-contact label {
+    font-weight: 600;
+    color: var(--black);
+    margin-bottom: 8px;
+    display: block;
+}
+.form-group-contact input,
+.form-group-contact textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: border 0.3s;
+}
+.form-group-contact input:focus,
+.form-group-contact textarea:focus {
+    border-color: var(--primary-blue);
+    outline: none;
+}
+.btn-submit {
+    background: var(--primary-blue);
+    color: white;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 50px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+.btn-submit:hover {
+    background: var(--dark-blue);
+}
+
+

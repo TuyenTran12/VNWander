@@ -6,72 +6,155 @@ from utils.session_init import init_session_state
 from config.languages import CONTENT
 
 def main():
-    # 1. Khởi tạo
-    st.set_page_config(page_title="VNWander - Careers", layout="wide")
+    # ── Cấu hình trang ──────────────────────────────────────────────
+    st.set_page_config(page_title="VNWander - Tuyển dụng", layout="wide")
     init_session_state()
     load_all_global_css()
-    render_navbar(current_page_path="/Careers")
-
+    
     if "lang" in st.query_params:
         st.session_state.lang = st.query_params["lang"]
     elif 'lang' not in st.session_state:
         st.session_state.lang = 'vi'
 
-    # 2. Lấy dữ liệu
     lang = st.session_state.get('lang', 'vi')
     C = CONTENT[lang].get('career_page', {})
-    values = C.get('core_values', [])
-
-    # 3. SECTION 1: VĂN HÓA ĐỜI SỐNG (Xếp sát lề để tránh hiện code)
-    # Cập nhật nội dung văn bản đầy đủ và thụt lề code Python chuẩn
-    st.markdown(f"""
-<div style="max-width: 1200px; margin: 0 auto; padding: 60px 20px; display: flex; align-items: center; gap: 60px; flex-wrap: wrap;">
-<div style="flex: 1; min-width: 350px;">
-<h1 style="font-family: 'Playfair Display', serif; font-size: 3.8rem; color: #4CB5F9; margin-bottom: 25px; font-weight: 800;">
-{C.get('culture_title', '')}
-</h1>
-<p style="font-size: 1.15rem; line-height: 1.8; color: #333; text-align: justify; margin-bottom: 35px;">
-Tại VNWander, sứ mệnh của chúng tôi là kiến tạo những sản phẩm tiên phong, nơi mọi giới hạn đều bị xóa nhòa để nhường chỗ cho tinh thần sáng tạo bứt phá. Chúng tôi không chỉ khuyến khích bạn vượt qua những rào cản thông thường mà còn trân trọng từng ý tưởng táo bạo nhất.<br><br>
-Nhịp sống mỗi ngày tại đây là sự vận động không ngừng của thị trường và khát khao chinh phục những đỉnh cao mới. Thời gian tại VNWander không gói gọn trong quy định 8 tiếng khô khan; đó là hành trình của những trải nghiệm rực rỡ, nơi bạn thỏa sức sống với đam mê tuổi trẻ, học hỏi miễn phí từ các 'cao nhân' và tận hưởng những giây phút 'chill' hết mình cùng đồng đội.<br><br>
-Đề cao sự minh bạch và tôn trọng bản sắc cá nhân, chúng tôi tin rằng sự khác biệt chính là sức mạnh để cùng nhau phát triển. VNWander là một cộng đồng đa sắc màu, luôn sẵn sàng mở rộng vòng tay chào đón những tài năng mới gia nhập hành trình đầy cảm hứng này.
-</p>
-<button style="background: #111; color: white; padding: 16px 40px; border: none; border-radius: 50px; font-weight: 700; cursor: pointer;">
-{C.get('join_btn', 'Join Us')}
-</button>
-</div>
-<div style="flex: 1; min-width: 350px;">
-<img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=800" style="width: 100%; border-radius: 25px; box-shadow: 0 25px 50px rgba(0,0,0,0.12);">
-</div>
-</div>
-""", unsafe_allow_html=True)
-
-    # 4. SECTION 2: GIÁ TRỊ CỐT LÕI (DRAGGABLE GRID NỀN ĐEN)
-    values_html = f"""
-<div class="values-dark-section">
-<h2 class="values-title-center">{C.get('values_title', 'Giá trị cốt lõi')}</h2>
-<div class="values-drag-container">
-"""
-    # Vòng lặp tạo 8 Card ngang
-    for val in values:
-        values_html += f"""
-<div class="value-card-landscape">
-<img src="{val['img']}" alt="{val['title']}">
-<div class="value-card-info">
-<h4>{val['title']}</h4>
-<p style="font-size: 0.9rem; opacity: 0.8; margin: 0;">{val['desc']}</p>
-</div>
-</div>
-"""
     
-    # Đóng các thẻ div
-    values_html += """
-</div>
-<p style="text-align: center; color: #555; margin-top: 20px; font-size: 0.9rem; font-style: italic;">(Dùng chuột kéo sang trái/phải để khám phá)</p>
-</div>
-"""
-    st.markdown(values_html, unsafe_allow_html=True)
+    render_navbar(current_page_path="/Careers")
 
-    # 5. Footer
+    # ── DỮ LIỆU DỰ PHÒNG (Tránh lỗi sập web) ─────────────────────────
+    culture_title = C.get('culture_title', 'Văn hóa & Đời sống')
+    join_btn = C.get('join_btn', 'Khám phá ngay')
+    
+    # Dữ liệu mẫu xịn xò nếu dictionary bị trống
+    default_perks = [
+        {"icon": "✈️", "title": "Travel Credits", "desc": "Ngân sách du lịch hàng năm và giảm giá cực sâu cho gia đình và bạn bè."},
+        {"icon": "🌍", "title": "Fam Trips", "desc": "Cơ hội đi khảo sát các điểm đến mới hoàn toàn miễn phí để lấy trải nghiệm."},
+        {"icon": "💻", "title": "Flexible Working", "desc": "Chính sách làm việc từ xa (Remote) và giờ giấc linh hoạt cho team Tech."},
+        {"icon": "🧘", "title": "Wellness & Health", "desc": "Bảo hiểm sức khỏe cao cấp và các workshop chăm sóc sức khỏe tinh thần."}
+    ]
+    perks_data = C.get('perks_benefits', {}).get('items', default_perks)
+
+    default_learning = [
+        {"step": "01", "icon": "🎓", "title": "Training Programs", "desc": "Tài trợ 100% các khóa học nâng cao nghiệp vụ, công nghệ mới và ngoại ngữ."},
+        {"step": "02", "icon": "🚀", "title": "Career Roadmap", "desc": "Lộ trình thăng tiến minh bạch từ Intern, Junior lên Senior và Management."},
+        {"step": "03", "icon": "🤝", "title": "Mentorship", "desc": "Chương trình 1-kèm-1 với các chuyên gia đầu ngành trong suốt 6 tháng đầu."}
+    ]
+    learning_data = C.get('learning_development', {}).get('roadmap_steps', default_learning)
+
+    default_jobs = [
+        {"name": "💻 Engineering & Product", "jobs": [
+            {"title": "Senior Fullstack Python Developer", "location": "Hà Nội / Remote"},
+            {"title": "UX/UI Product Designer", "location": "Hồ Chí Minh"}
+        ]},
+        {"name": "🌍 Operations & Travel Experts", "jobs": [
+            {"title": "Senior Travel Consultant", "location": "Đà Nẵng"},
+            {"title": "Local Experience Guide", "location": "Sapa / Hội An"}
+        ]},
+        {"name": "🚀 Sales & Marketing", "jobs": [
+            {"title": "Digital Marketing Manager", "location": "Hà Nội"},
+            {"title": "B2B Partnership Executive", "location": "Hồ Chí Minh"}
+        ]}
+    ]
+    jobs_data = C.get('open_positions', {}).get('departments', default_jobs)
+
+    # ── KHỞI TẠO HTML (SINGLE-LINE BẢO MẬT) ──────────────────────────
+    html_careers = '<div class="careers-wrapper">'
+
+    # ===== SECTION 1: HERO & CULTURE =====
+    html_careers += (
+        '<section class="cr-hero-section">'
+        '<div class="cr-container cr-hero-flex">'
+        '<div class="cr-hero-text">'
+        '<span class="cr-eyebrow">CÙNG NHAU KIẾN TẠO</span>'
+        f'<h1 class="cr-title">{culture_title}</h1>'
+        '<p class="cr-desc">Tại VNWander, sứ mệnh của chúng tôi là kiến tạo những sản phẩm tiên phong, nơi mọi giới hạn đều bị xóa nhòa. Chúng tôi không gói gọn trong quy định 8 tiếng khô khan; đó là hành trình của những trải nghiệm rực rỡ, nơi bạn thỏa sức sống với đam đam mê và khám phá thế giới.</p>'
+        f'<a href="#jobs" class="cr-btn-primary">{join_btn} <span class="arrow">→</span></a>'
+        '</div>'
+        '<div class="cr-hero-image">'
+        '<div class="image-blob"></div>'
+        '<img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=800" alt="VNWander Culture">'
+        '</div>'
+        '</div>'
+        '</section>'
+    )
+
+    # ===== SECTION 2: PERKS & BENEFITS (ĐẶC QUYỀN TRẢI NGHIỆM) =====
+    html_careers += (
+        '<section class="cr-perks-section">'
+        '<div class="cr-container">'
+        '<div class="cr-section-header">'
+        '<span class="cr-eyebrow">ĐÃI NGỘ XỨNG TẦM</span>'
+        '<h2 class="cr-title">Đặc quyền dành riêng cho bạn</h2>'
+        '<div class="cr-divider"></div>'
+        '</div>'
+        '<div class="cr-perks-grid">'
+    )
+    for p in perks_data:
+        html_careers += (
+            f'<div class="cr-perk-card">'
+            f'<div class="cr-perk-icon-wrap"><div class="cr-perk-icon">{p.get("icon", "✨")}</div></div>'
+            f'<h3 class="cr-perk-title">{p.get("title", "")}</h3>'
+            f'<p class="cr-perk-desc">{p.get("desc", "")}</p>'
+            f'</div>'
+        )
+    html_careers += '</div></div></section>'
+
+    # ===== SECTION 3: LEARNING & DEVELOPMENT (LỘ TRÌNH PHÁT TRIỂN) =====
+    html_careers += (
+        '<section class="cr-learning-section">'
+        '<div class="cr-container">'
+        '<div class="cr-section-header">'
+        '<span class="cr-eyebrow">KHÔNG NGỪNG TIẾN BƯỚC</span>'
+        '<h2 class="cr-title">Phát triển sự nghiệp cùng VNWander</h2>'
+        '<div class="cr-divider"></div>'
+        '</div>'
+        '<div class="cr-roadmap-container">'
+    )
+    for l in learning_data:
+        html_careers += (
+            f'<div class="cr-roadmap-step">'
+            f'<div class="cr-step-number">{l.get("step", "00")}</div>'
+            f'<div class="cr-step-content">'
+            f'<div class="cr-step-icon">{l.get("icon", "🎯")}</div>'
+            f'<div><h3 class="cr-step-title">{l.get("title", "")}</h3>'
+            f'<p class="cr-step-desc">{l.get("desc", "")}</p></div>'
+            f'</div></div>'
+        )
+    html_careers += '</div></div></section>'
+
+    # ===== SECTION 4: OPEN POSITIONS (VỊ TRÍ TUYỂN DỤNG) =====
+    html_careers += (
+        '<section id="jobs" class="cr-jobs-section">'
+        '<div class="cr-container">'
+        '<div class="cr-section-header">'
+        '<span class="cr-eyebrow">GIA NHẬP ĐỘI NGŨ</span>'
+        '<h2 class="cr-title">Các vị trí đang mở</h2>'
+        '<div class="cr-divider"></div>'
+        '</div>'
+        '<div class="cr-jobs-accordion">'
+    )
+    for dept in jobs_data:
+        html_careers += (
+            f'<div class="cr-dept-group">'
+            f'<h3 class="cr-dept-name">{dept.get("name", "")}</h3>'
+            f'<div class="cr-job-list">'
+        )
+        for job in dept.get('jobs', []):
+            html_careers += (
+                f'<div class="cr-job-item">'
+                f'<div class="cr-job-info">'
+                f'<h4 class="cr-job-title">{job.get("title", "")}</h4>'
+                f'<span class="cr-job-location"><i class="fas fa-map-marker-alt"></i> 📍 {job.get("location", "")}</span>'
+                f'</div>'
+                f'<a href="#" class="cr-btn-apply">Apply Now <span class="arrow">→</span></a>'
+                f'</div>'
+            )
+        html_careers += '</div></div>'
+
+    html_careers += '</div></div></section></div>' # Đóng wrapper
+
+    # ── RENDER 1 LẦN DUY NHẤT ───────────────────────────────────────
+    st.markdown(html_careers, unsafe_allow_html=True)
     render_footer()
 
 if __name__ == "__main__":
