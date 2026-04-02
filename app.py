@@ -175,7 +175,4 @@ def main():
         html_reviews += '</div></div></div></div>'
         st.markdown(html_reviews, unsafe_allow_html=True)
 
-    render_footer()
-
-if __name__ == "__main__":
-    main()
+render_footer()
