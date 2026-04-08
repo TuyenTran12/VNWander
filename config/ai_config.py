@@ -8,11 +8,8 @@ import time
 from groq import Groq, RateLimitError, APIError, APIConnectionError, APITimeoutError
 
 # ── Free Groq API key ──────────────────────────────────────────────────────────
-# Get yours free at https://console.groq.com → "Create API Key"
-# Free tier: 14,400 requests/day · 500,000 tokens/minute · no credit card needed
-GROQ_API_KEY = "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"
-GROQ_MODEL   = "llama-3.1-8b-instant"   # fast & free; swap to
-                                          # "llama-3.3-70b-versatile" for smarter answers
+GROQ_API_KEY = st.secrets["GROQ_API_KEY"]
+GROQ_MODEL   = st.secrets["GROQ_MODEL"]
 
 SYSTEM_PROMPT = (
     "You are Chat Box AI VNWander, the official AI Travel Guide for VNWander — "
