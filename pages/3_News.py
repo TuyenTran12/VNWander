@@ -1,5 +1,6 @@
 import streamlit as st
 import textwrap
+from components.ai_widget import render_chat_widget
 from components.navbar import render_navbar
 from components.footer import render_footer
 from utils.helpers import load_all_global_css
@@ -64,6 +65,7 @@ def main():
 
     # 6. Render Footer
     render_footer()
+    render_chat_widget()
 
 if __name__ == "__main__":
     main()

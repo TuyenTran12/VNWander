@@ -1,4 +1,5 @@
 import streamlit as st
+from components.ai_widget import render_chat_widget
 from components.navbar import render_navbar
 from components.footer import render_footer
 from utils.helpers import load_all_global_css
@@ -254,3 +255,4 @@ st.markdown(html_cta, unsafe_allow_html=True)
 
 # ── Footer ──────────────────────────────────────────────────────────────────────
 render_footer()
+render_chat_widget()

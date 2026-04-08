@@ -1,6 +1,7 @@
 import streamlit as st
 import datetime
 import json
+from components.ai_widget import render_chat_widget
 from config.languages import CONTENT
 from utils.session_init import init_session_state
 from utils.helpers import load_all_global_css
@@ -156,3 +157,4 @@ finally:
     session.close()
 
 render_footer()
+render_chat_widget()
