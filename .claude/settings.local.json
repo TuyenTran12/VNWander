@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(D:/Desktop/Cursor_Tutorial/VNWander/.venv/Scripts/pip install:*)",
+      "Bash(python -m pip install pyodbc)",
+      "WebFetch(domain:ai.google.dev)",
+      "Bash(pip show:*)",
+      "Bash(python -c \"from genai import Client; print\\(dir\\(Client\\)\\)\")",
+      "Bash(python:*)",
+      "Bash(pip list:*)",
+      "Bash(.venv/Scripts/pip install:*)",
+      "Bash(pip install:*)",
+      "Bash(cp -r /c/Users/Acer/AppData/Local/Python/Lib/site-packages/google/genai /c/Users/Acer/Downloads/VNWander/.venv/Lib/site-packages/google/)",
+      "Bash(cp -r /c/Users/Acer/AppData/Local/Python/Lib/site-packages/google/genai /d/Desktop/Cursor_Tutorial/VNWander/.venv/Lib/site-packages/google/)",
+      "Bash(whereis python:*)",
+      "Bash(.venv/Scripts/python.exe -m pip install groq)"
+    ]
+  }
+}

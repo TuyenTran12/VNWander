@@ -1,10 +1,6 @@
 """
 ai_widget.py — VNWander floating AI chat widget.
-Drop render_chat_widget() at the bottom of any Streamlit page.
-Uses the shared ai_config module — chat history is synced with 8_AI_Assistant.py.
-
-Design: pure white background, solid blue (#0056A3) border, black (#000000) text,
-circular button at bottom-left.
+Save this file to: components/ai_widget.py
 """
 import streamlit as st
 from config.ai_config import init_chat_session, get_history, stream_response
@@ -12,136 +8,253 @@ from config.ai_config import init_chat_session, get_history, stream_response
 
 def render_chat_widget() -> None:
     """
-    Render the floating button + popover panel.
+    Render the floating chat bubble (bottom-right) + popover panel.
     Call once per page, after all other page content.
     """
     init_chat_session()
 
-    # ── Widget CSS ──
+    # ── CSS ────────────────────────────────────────────────────────────────────
+    # CRITICAL: every line must start at column 0.
+    # Streamlit treats any line with 4+ leading spaces as a <pre> code block
+    # and renders it as raw text instead of HTML.
     st.markdown("""
 <style>
-/* ── Floating circular button at bottom-left ── */
-.vnw-chat-btn {
-    position: fixed !important;
-    bottom: 24px !important;
-    left: 24px !important;
-    width: 56px !important;
-    height: 56px !important;
-    border-radius: 50% !important;
-    background: #FFFFFF !important;
-    border: 2px solid #0056A3 !important;
-    color: #000000 !important;
-    font-size: 24px !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    cursor: pointer !important;
-    z-index: 9999 !important;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.2) !important;
-}
-.vnw-chat-btn:hover {
-    background: #0056A3 !important;
-    color: #FFFFFF !important;
-}
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap');
 
-/* ── Popover container — pure white, blue border ── */
+/* ═══════════════════════════════════════════════════
+   1. FLOATING BUBBLE — bottom-right, blue circle
+═══════════════════════════════════════════════════ */
 div[data-testid="stPopover"] {
-    background: #FFFFFF !important;
-    border: 2px solid #0056A3 !important;
-    border-radius: 8px !important;
-    box-shadow: 0 4px 20px rgba(0, 86, 163, 0.15) !important;
-    padding: 16px !important;
+position: fixed !important;
+bottom: 30px !important;
+right: 30px !important;
+left: auto !important;
+top: auto !important;
+z-index: 9999 !important;
+width: fit-content !important;  /* Prevents Streamlit stretching the wrapper
+                                    full-width and creating a wide bar */
 }
 
-div[data-testid="stPopover"] > div {
-    background: #FFFFFF !important;
+div[data-testid="stPopover"] > button {
+width: 65px !important;
+height: 65px !important;
+min-width: 65px !important;
+min-height: 65px !important;
+max-width: 65px !important;
+max-height: 65px !important;
+border-radius: 50% !important;
+background-color: #0056A3 !important;
+color: #ffffff !important;
+border: 3px solid #ffffff !important;
+box-shadow: 0 6px 24px rgba(0,86,163,0.45) !important;
+padding: 0 !important;
+font-size: 1.6rem !important;
+line-height: 1 !important;
+display: flex !important;
+align-items: center !important;
+justify-content: center !important;
+overflow: hidden !important;
+transition: transform 0.22s ease, box-shadow 0.22s ease !important;
+}
+div[data-testid="stPopover"] > button:hover {
+transform: scale(1.1) !important;
+box-shadow: 0 12px 32px rgba(0,86,163,0.55) !important;
 }
 
-/* ── All text in widget — black ── */
-div[data-testid="stPopover"] * {
-    color: #000000 !important;
+/* ═══════════════════════════════════════════════════
+   2. CHAT WINDOW — 450px wide, white bg, blue border
+═══════════════════════════════════════════════════ */
+div[data-testid="stPopoverBody"] {
+width: 450px !important;
+min-width: 450px !important;
+background-color: #ffffff !important;
+border: 2px solid #0056A3 !important;
+border-radius: 16px !important;
+box-shadow: 0 16px 48px rgba(0,86,163,0.18) !important;
+padding: 0 !important;
+overflow: hidden !important;
+font-family: 'DM Sans', sans-serif !important;
+color: #111111 !important;
 }
 
-/* ── Chat message boxes ── */
-div[data-testid="stChatMessage"],
-.stChatMessage {
-    background: #FFFFFF !important;
-    border: 1px solid #0056A3 !important;
+/* Force white background and black text on ALL children */
+div[data-testid="stPopoverBody"] * {
+color: #111111 !important;
+background-color: transparent !important;
 }
 
-.stChatMessage * {
-    color: #000000 !important;
+/* ═══════════════════════════════════════════════════
+   3. HEADER BAR
+═══════════════════════════════════════════════════ */
+.vnw-header {
+background: linear-gradient(135deg, #0056A3, #1a7fd4) !important;
+padding: 13px 16px !important;
+display: flex !important;
+align-items: center !important;
+gap: 10px !important;
+}
+.vnw-header-title {
+font-family: 'DM Sans', sans-serif !important;
+font-size: 0.95rem !important;
+font-weight: 600 !important;
+color: #ffffff !important;
+letter-spacing: 0.2px !important;
+}
+.vnw-dot {
+width: 9px !important;
+height: 9px !important;
+border-radius: 50% !important;
+background: #5fffaa !important;
+box-shadow: 0 0 7px #5fffaa !important;
+flex-shrink: 0 !important;
+animation: vnwpulse 2s ease-in-out infinite !important;
+}
+@keyframes vnwpulse {
+0%, 100% { opacity: 1; }
+50%       { opacity: 0.3; }
 }
 
-/* ── Input field ── */
-div[data-testid="stTextInput"] input,
-div[data-testid="stTextArea"] textarea {
-    color: #000000 !important;
-    background: #FFFFFF !important;
-    border: 1px solid #0056A3 !important;
+/* ═══════════════════════════════════════════════════
+   4. MESSAGE BUBBLES — white bg, blue border, black text
+      User → right-aligned | AI → left-aligned
+═══════════════════════════════════════════════════ */
+
+/* Base bubble reset */
+div[data-testid="stPopoverBody"] [data-testid="stChatMessage"] {
+background-color: #ffffff !important;
+border: 1.5px solid #0056A3 !important;
+border-radius: 14px !important;
+padding: 10px 14px !important;
+font-size: 0.88rem !important;
+font-family: 'DM Sans', sans-serif !important;
+max-width: 80% !important;
+color: #111111 !important;
 }
 
-/* ── Button / send icon ── */
-.stFormItem button,
-div[data-testid="stPopover"] .stButton button {
-    background: #0056A3 !important;
-    color: #FFFFFF !important;
-    border: none !important;
-    border-radius: 50% !important;
-    width: 40px !important;
-    height: 40px !important;
-    min-height: 40px !important;
-    padding: 8px !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
+/* User messages — push to the right */
+div[data-testid="stPopoverBody"] [data-testid="stChatMessage"]:has([data-testid="chatAvatarIcon-user"]) {
+margin-left: auto !important;
+margin-right: 0 !important;
+flex-direction: row-reverse !important;
+background-color: #ffffff !important;
+border-color: #0056A3 !important;
 }
 
-.stFormItem button:hover,
-div[data-testid="stPopover"] .stButton button:hover {
-    background: #004080 !important;
+/* AI messages — stay on the left */
+div[data-testid="stPopoverBody"] [data-testid="stChatMessage"]:has([data-testid="chatAvatarIcon-assistant"]) {
+margin-left: 0 !important;
+margin-right: auto !important;
+background-color: #ffffff !important;
+border-color: #0056A3 !important;
 }
 
-/* ── Warning/error messages ── */
-div[data-testid="stPopover"] .stAlert {
-    border-color: #0056A3 !important;
-    background: #FFFFFF !important;
-    color: #000000 !important;
+/* All text inside bubbles — black */
+div[data-testid="stPopoverBody"] [data-testid="stChatMessage"] p,
+div[data-testid="stPopoverBody"] [data-testid="stChatMessage"] span,
+div[data-testid="stPopoverBody"] [data-testid="stChatMessage"] div,
+div[data-testid="stPopoverBody"] [data-testid="stChatMessage"] li {
+color: #111111 !important;
+background-color: transparent !important;
+}
+
+/* ═══════════════════════════════════════════════════
+   5. SCROLLABLE MESSAGE AREA
+═══════════════════════════════════════════════════ */
+div[data-testid="stPopoverBody"] [data-testid="stVerticalBlockBorderWrapper"] {
+overflow-y: auto !important;
+max-height: 380px !important;
+background-color: #ffffff !important;
+padding: 10px !important;
+}
+
+/* ═══════════════════════════════════════════════════
+   6. INPUT FIELD — black text, white bg, blue border
+═══════════════════════════════════════════════════ */
+div[data-testid="stPopoverBody"] input[type="text"] {
+background-color: #ffffff !important;
+color: #111111 !important;
+caret-color: #111111 !important;
+border: 2px solid #0056A3 !important;
+border-radius: 10px !important;
+font-family: 'DM Sans', sans-serif !important;
+font-size: 0.9rem !important;
+padding: 8px 12px !important;
+}
+div[data-testid="stPopoverBody"] input[type="text"]:focus {
+border-color: #003f7a !important;
+box-shadow: 0 0 0 3px rgba(0,86,163,0.15) !important;
+outline: none !important;
+}
+div[data-testid="stPopoverBody"] input[type="text"]::placeholder {
+color: #7a9bbf !important;
+}
+
+/* ═══════════════════════════════════════════════════
+   7. SEND BUTTON
+═══════════════════════════════════════════════════ */
+div[data-testid="stPopoverBody"] [data-testid="stFormSubmitButton"] button {
+background-color: #0056A3 !important;
+color: #ffffff !important;
+border: none !important;
+border-radius: 10px !important;
+font-family: 'DM Sans', sans-serif !important;
+font-weight: 600 !important;
+font-size: 0.9rem !important;
+padding: 0.45rem 1rem !important;
+width: 100% !important;
+transition: background-color 0.2s ease !important;
+}
+div[data-testid="stPopoverBody"] [data-testid="stFormSubmitButton"] button:hover {
+background-color: #003f7a !important;
+}
+
+/* ═══════════════════════════════════════════════════
+   8. REMOVE DEFAULT FORM BORDER
+═══════════════════════════════════════════════════ */
+div[data-testid="stPopoverBody"] [data-testid="stForm"] {
+border: none !important;
+padding: 10px !important;
+background-color: #f5f9ff !important;
+border-top: 1px solid #dceeff !important;
 }
 </style>
 """, unsafe_allow_html=True)
 
-    # ── Panel header ──────────────────────────────────────────────────
-    with st.popover("💬"):
-        st.markdown(
-            """
-<div class="vn-widget-header">
-    <span class="vn-widget-dot"></span>
-    <span class="vn-widget-header-title">Linh — VNWander Guide</span>
+    # ── Popover ────────────────────────────────────────────────────────────────
+    with st.popover("💬"):   # Icon-only label keeps the button a true circle
+
+        # Header
+        st.markdown("""
+<div class="vnw-header">
+<div class="vnw-dot"></div>
+<span class="vnw-header-title">🌿 Chat Box AI VNWander</span>
 </div>
-""",
-            unsafe_allow_html=True,
-        )
+""", unsafe_allow_html=True)
 
-        # ── Error display (non-blocking) ──────────────────────────────────
-        err = st.session_state.get("chat_error")
-        if err:
-            st.warning(f"{err}")
+        # Error guard
+        if st.session_state.get("chat_error"):
+            st.error("❌ Không thể kết nối AI.")
+            return
 
-        # ── Scrollable message history ────────────────────────────────────
-        chat_box = st.container(height=340)
+        # ── Scrollable message history ─────────────────────────────────────────
+        # History is Groq-format dicts: {"role": "user"/"assistant", "content": "..."}
+        chat_box = st.container(height=360)
         with chat_box:
             history = get_history()
             if not history:
                 with st.chat_message("assistant", avatar="🌿"):
-                    st.markdown("Xin chào! Tôi là Linh, trợ lý AI cho du lịch Việt Nam.")
+                    st.markdown("Xin chào! Tôi là **Chat Box AI VNWander**. Hello! I'm **Chat Box AI VNWander**. Tôi có thể giúp gì cho chuyến đi của bạn? / How can I help with your trip? 🌏")
             for msg in history:
-                role = "user" if msg.role == "user" else "assistant"
+                role   = msg["role"]
                 avatar = "🧑" if role == "user" else "🌿"
                 with st.chat_message(role, avatar=avatar):
-                    st.markdown(msg.parts[0].text)
+                    st.markdown(msg["content"])
 
-        # ── Input form ────────────────────────────────────────────────────
+        # ── Input form ─────────────────────────────────────────────────────────
+        # FIX: clear_on_submit=True wipes the widget value to "" before the
+        # handler block runs, so checking `user_input` is always False.
+        # We save the value into session_state INSIDE the form (while it still
+        # exists), then read + pop it OUTSIDE the form after the clear.
         with st.form("vnw_widget_form", clear_on_submit=True):
             cols = st.columns([5, 1])
             with cols[0]:
@@ -154,11 +267,11 @@ div[data-testid="stPopover"] .stAlert {
             with cols[1]:
                 submitted = st.form_submit_button("➤")
 
-            # Save value NOW, before clear_on_submit destroys it
+            # Capture while the value still exists
             if submitted:
                 st.session_state["vnw_pending"] = typed
 
-        # ── Handle outside the form — value is safe in session_state ──────
+        # ── Handle submission — safe outside the form ──────────────────────────
         pending = st.session_state.pop("vnw_pending", "")
         if pending:
             with chat_box:
@@ -172,7 +285,3 @@ div[data-testid="stPopover"] .stAlert {
                         placeholder.markdown(full_text + "▌")
                     placeholder.markdown(full_text)
             st.rerun()
-
-
-if __name__ == "__main__":
-    render_chat_widget()

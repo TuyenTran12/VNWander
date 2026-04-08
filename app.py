@@ -7,6 +7,7 @@ from components.search_bar import render_search_bar
 from components.hero import render_hero
 from components.footer import render_footer
 from config.languages_home import CONTENT
+from components.ai_widget import render_chat_widget
 
 # ------------------------------------------------------------------------------
 # Helper: Extract all cities from the destination data
@@ -34,6 +35,18 @@ def main():
                 combined_css += f.read() + "\n\n"
     if combined_css:
         st.markdown(f"<style>{combined_css}</style>", unsafe_allow_html=True)
+
+    # ── Global scrollbar styling (thin blue theme) ──────────────────────
+    st.markdown("""
+    <style>
+    /* ── Main app scrollbar ── */
+    ::-webkit-scrollbar { width: 8px !important; height: 8px !important; }
+    ::-webkit-scrollbar-track { background: transparent !important; }
+    ::-webkit-scrollbar-thumb { background: #c5dcf5 !important; border-radius: 4px !important; }
+    ::-webkit-scrollbar-thumb:hover { background: #0056A3 !important; }
+    * { scrollbar-width: thin !important; scrollbar-color: #c5dcf5 transparent !important; }
+    </style>
+    """, unsafe_allow_html=True)
 
     # Initialize localization (i18n) from URL params or default to Vietnamese
     if "lang" in st.query_params:
@@ -187,6 +200,7 @@ def main():
 
     # ── RENDER FOOTER ──────────────────────────────────────────────────────────
     render_footer()
+    render_chat_widget()
 
 if __name__ == "__main__":
     main()

@@ -114,10 +114,4 @@
 }
 
 /* Responsive cho tablet và mobile */
-@media (max-width: 1200px) {
-    .footer-grid { grid-template-columns: 1fr 1fr; gap: 30px; }
-}
-@media (max-width: 768px) {
-    .vn-footer { padding: 60px 0 20px 0; }
-    .footer-grid { grid-template-columns: 1fr; gap: 25px; }
-}
+/* ── AI Chat Widget Styles: all in ai_widget.py now, no overrides here ── */

@@ -4,3 +4,5 @@ transformers
 torch
 pillow
 paddleocr
+google-genai
+groq

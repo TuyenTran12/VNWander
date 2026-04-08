@@ -6,7 +6,6 @@ import streamlit as st
 @st.cache_resource
 def init_connection():
     try:
-        # Chuỗi kết nối dựa trên thông số máy tính của Leo
         connection_string = (
             "DRIVER={ODBC Driver 17 for SQL Server};"
             "SERVER=DESKTOP-0INB54K\\SQLEXPRESS;"
